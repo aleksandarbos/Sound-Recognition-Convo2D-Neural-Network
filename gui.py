@@ -1,5 +1,8 @@
 from Tkinter import *
-import tkMessageBox
+import matplotlib.font_manager as font_manager
+
+from recorder import Recorder
+
 
 class Gui:
 
@@ -12,8 +15,7 @@ class Gui:
 
     def create_window(self, root):
         root.title("Soft Sound")
-        root.geometry("350x100")
-        #root.geometry("350x450")
+        root.geometry("350x450")
         root.resizable(height=FALSE, width=FALSE)
 
     def create_record(self, root):
@@ -26,24 +28,24 @@ class Gui:
 
         l_caption = Label(frame_record1, text="Record sound:")
         l_caption.pack(side=LEFT);
-        b_help = Button(frame_record1, text="info", padx=0.5, pady=0.5)
+        b_help = Button(frame_record1, text="info", width=3, height=1)
         b_help.pack(side=RIGHT)
 
-        xx = Do();
-
-        b_start = Button(frame_record2, text='Start / Stop', padx=15, pady=8, command=Do.doit)
-        b_start.pack(pady=10, padx=20, side=LEFT)
-        l_time = Text(frame_record2, height=1, width=5, state='disabled')
+        global b_start
+        global l_time
+        b_start = Button(frame_record2, text='Record', width=12, height=2, command=Controls.main_button_click)
+        b_start.pack(pady=10, padx=15, side=LEFT)
+        l_time = Label(frame_record2, height=1, width=5, state='disabled', bg='white', text='00:00', foreground='black')
         l_time.pack(pady=10, padx=(10,0), side=LEFT)
         l_status = Label(frame_record2, text="...recording", foreground='red')
         l_status.pack(pady=10, padx=(5,10), side=LEFT)
-        b_reset = Button(frame_record2, text='Reset', padx=2)
+        b_reset = Button(frame_record2, text='Reset', padx=2, command=Controls.reset_button_click)
         b_reset.pack(pady=10, padx=20, side=LEFT)
 
     def create_presentation(self, root):
         frame_presentation = Frame(root, bd=4, bg='red')
         frame_presentation.pack(side=TOP, fill=BOTH)
-        frame_presentation2 = Frame(frame_presentation, pady=140)
+        frame_presentation2 = Frame(frame_presentation, pady=135)
         frame_presentation2.pack(side=TOP, fill=BOTH)
 
         l_resulttt = Label(frame_presentation2, text="(here be picture)")
@@ -61,7 +63,21 @@ class Gui:
         b_details = Button(frame_result, text='Details')
         b_details.pack(pady=10, padx=5, side=LEFT)
 
-class Do:
     @staticmethod
-    def doit():
-        print "click"
+    def change_time(time):
+        l_time["text"] = time
+
+class Controls:
+    @staticmethod
+    def main_button_click():
+        if (b_start["text"] == "Record"):
+            b_start["text"] = "Analyze"
+            Recorder.start_recording()
+        else:
+            b_start["text"] = "Record"
+            #startAnalyze
+
+    @staticmethod
+    def reset_button_click():
+        b_start["text"] = "Record"
+        Gui.change_time("00:00")
