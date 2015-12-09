@@ -1,6 +1,7 @@
 from datetime import datetime
 import pyaudio
 import wave
+import matplotlib.pyplot as plt
 
 class Recorder:
 
@@ -10,11 +11,11 @@ class Recorder:
     def start_recording():
         CHUNK = 1024
         FORMAT = pyaudio.paInt16 #paInt8
-        CHANNELS = 2
+        CHANNELS = 1
         RATE = 44100 #sample rate
         RECORD_SECONDS = 5
         #WAVE_OUTPUT_FILENAME = "sound" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
-        WAVE_OUTPUT_FILENAME = "jest.wav"
+        WAVE_OUTPUT_FILENAME = "test.wav"
         filename = WAVE_OUTPUT_FILENAME
 
         p = pyaudio.PyAudio()
@@ -25,7 +26,7 @@ class Recorder:
                         input=True,
                         frames_per_buffer=CHUNK) #buffer
 
-        print("* recording")
+        print("* recording...")
 
         frames = []
 
@@ -35,9 +36,9 @@ class Recorder:
             data = stream.read(CHUNK)
             frames.append(data) # 2 bytes(16 bits) per channel
 
-        print("* done recording")
+        print("* done recording, audio sample saved at [samples] directory.")
 
-        wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+        wf = wave.open('samples/'+WAVE_OUTPUT_FILENAME, 'wb')
         wf.setnchannels(CHANNELS)
         wf.setsampwidth(p.get_sample_size(FORMAT))
         wf.setframerate(RATE)

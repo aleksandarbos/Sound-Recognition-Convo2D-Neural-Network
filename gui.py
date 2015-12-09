@@ -1,6 +1,8 @@
 from Tkinter import *
 import matplotlib.font_manager as font_manager
+import plot
 
+from plot import plot_audio
 from recorder import Recorder
 
 
@@ -75,7 +77,7 @@ class Controls:
             Recorder.start_recording()
         else:
             b_start["text"] = "Record"
-            #startAnalyze
+            plot_audio("test.wav", "fft")
 
     @staticmethod
     def reset_button_click():
