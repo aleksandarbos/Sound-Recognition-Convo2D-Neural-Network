@@ -4,13 +4,13 @@ import wave
 import sys
 from scipy.fftpack import fft
 
-
 def plot_audio(file_name, plot_type):
     spf = wave.open('samples/'+file_name,'r')
 
     #Extract Raw Audio from Wav File
     signal = spf.readframes(-1)
     signal = np.fromstring(signal, 'Int16')
+    global fs
     fs = spf.getframerate()
 
     #If Stereo
@@ -37,4 +37,4 @@ def plot_fft_audio(signal):
     plt.title("FFT Signal Wave...")
     plt.plot(abs(c[:(d-1)]),'r')
     plt.show()
-    savefig(filename+'.png',bbox_inches='tight')
+    #savefig(filename+'.png',bbox_inches='tight')
