@@ -10,10 +10,10 @@ class Recorder:
     def start_recording():
         CHUNK = 1024
         FORMAT = pyaudio.paInt16 #paInt8
-        CHANNELS = 2
+        CHANNELS = 1
         RATE = 44100 #sample rate
         RECORD_SECONDS = 5
-        #WAVE_OUTPUT_FILENAME = "sound" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
+        #WAVE_OUTPUT_FILENAME = "sound_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
         WAVE_OUTPUT_FILENAME = "jest.wav"
         filename = WAVE_OUTPUT_FILENAME
 
@@ -29,7 +29,7 @@ class Recorder:
 
         frames = []
 
-        end_value = int(RATE / CHUNK * RECORD_SECONDS)
+        end_value = int(RATE / CHUNK * RECORD_SECONDS) + 1
         print end_value
         for i in range(0, end_value):
             data = stream.read(CHUNK)

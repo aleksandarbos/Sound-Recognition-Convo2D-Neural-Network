@@ -1,8 +1,8 @@
 from Tkinter import *
 import matplotlib.font_manager as font_manager
 
+from analyzer import Analyzer
 from recorder import Recorder
-
 
 class Gui:
 
@@ -75,7 +75,7 @@ class Controls:
             Recorder.start_recording()
         else:
             b_start["text"] = "Record"
-            #startAnalyze
+            Analyzer.plot_frequency()
 
     @staticmethod
     def reset_button_click():
