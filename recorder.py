@@ -10,7 +10,7 @@ class Recorder:
     def start_recording():
         CHUNK = 1024
         FORMAT = pyaudio.paInt16 #paInt8
-        CHANNELS = 1
+        CHANNELS = 2
         RATE = 44100 #sample rate
         RECORD_SECONDS = 5
         #WAVE_OUTPUT_FILENAME = "sound_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
