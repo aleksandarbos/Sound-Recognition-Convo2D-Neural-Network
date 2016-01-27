@@ -12,7 +12,7 @@ class Recorder:
         FORMAT = pyaudio.paInt16 #paInt8
         CHANNELS = 1
         RATE = 44100 #sample rate
-        RECORD_SECONDS = 5
+        RECORD_SECONDS = 3
         #WAVE_OUTPUT_FILENAME = "sound_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
         WAVE_OUTPUT_FILENAME = "test.wav"
         filename = WAVE_OUTPUT_FILENAME

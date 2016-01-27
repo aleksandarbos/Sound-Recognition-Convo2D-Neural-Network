@@ -1,18 +1,38 @@
 from Tkinter import *
 import matplotlib.font_manager as font_manager
-
+import tkFileDialog
 from recorder import Recorder
 from plot import  Plot
 
 
 class Gui:
+    global menu_bar
 
     def __init__(self, root):
+        menu_bar = Menu(root)
+        file_menu = Menu(menu_bar, tearoff=0)
+
         self.root = root
         self.create_window(root)
         self.create_record(root)
         self.create_presentation(root)
         self.create_result(root)
+        self.create_menu_bar(root, menu_bar, file_menu)
+
+        self.root.config(menu=menu_bar)
+        self.root.mainloop()
+
+
+
+    def open_audio_file(self):
+        sys.stdout.write("Searching for file...")
+        file_path = tkFileDialog.askopenfilename()
+        print "\n[Selected file path:] " + file_path
+
+    def create_menu_bar(self, root, menu_bar, file_menu):
+        file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
+        menu_bar.add_cascade(label="File", menu=file_menu)
+
 
     def create_window(self, root):
         root.title("Soft Sound")
@@ -76,7 +96,6 @@ class Controls:
             Recorder.start_recording()
         else:
             b_start["text"] = "Record"
-            Plot.plot_audio("test.wav", "raw")
             Plot.plot_audio("test.wav", "fft")
 
     @staticmethod

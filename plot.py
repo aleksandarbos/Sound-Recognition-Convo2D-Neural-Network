@@ -18,7 +18,8 @@ class Plot:
     def plot_fft_audio(signal):
         b=[(ele/2**8.)*2-1 for ele in signal] # this is 8-bit track, b is now normalized on [-1,1)
         c = fft(b) # create a list of complex number
-        d = len(c)/2  # you only need half of the fft list
+        #d = len(c)/2  # you only need half of the fft list
+        d = 5000
         plt.title("FFT Signal Wave...")
         plt.plot(abs(c[:(d-1)]),'r')
         plt.show()
@@ -32,6 +33,8 @@ class Plot:
         #Extract Raw Audio from Wav File
         signal = spf.readframes(-1)
         signal = np.fromstring(signal, 'Int16')
+        #for i in range(0,3):
+            #signal = signal[i * 45056 : (i + 1) * 45056]
         global fs
         fs = spf.getframerate()
 
