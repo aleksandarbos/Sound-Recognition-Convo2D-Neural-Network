@@ -1,14 +1,16 @@
 from Tkinter import *
-import matplotlib.font_manager as font_manager
 import tkFileDialog
 from recorder import Recorder
 from plot import  Plot
 
-
 class Gui:
-    global menu_bar
 
     def __init__(self, root):
+        l_selected_file_name_var = StringVar()      # atributes of class
+        selected_file_name = ""
+        b_waveform = []
+        b_fft = []
+
         menu_bar = Menu(root)
         file_menu = Menu(menu_bar, tearoff=0)
 
@@ -27,7 +29,15 @@ class Gui:
     def open_audio_file(self):
         sys.stdout.write("Searching for file...")
         file_path = tkFileDialog.askopenfilename()
-        print "\n[Selected file path:] " + file_path
+        splitted_path = file_path.split('/')
+        file_name = splitted_path[len(splitted_path)-1]
+        self.selected_file_name = file_name         #global var, selected file_name
+        self.l_selected_file_name_var.set("[Selected file name]: " + self.selected_file_name)
+
+        self.b_fft['state'] = 'active'         # enable plot buttons
+        self.b_waveform['state'] = 'active'
+
+        print "\n[Selected file name:] " + file_name
 
     def create_menu_bar(self, root, menu_bar, file_menu):
         file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
@@ -44,23 +54,39 @@ class Gui:
         frame_record.pack(side=TOP, fill=BOTH, pady=(0,5))
         frame_record1 = Frame(frame_record)
         frame_record1.pack(side=TOP, fill=BOTH, pady=(0,10))
-        frame_record2 = Frame(frame_record)
-        frame_record2.pack(side=BOTTOM, fill=NONE)
+        frame_record2 = Frame(frame_record)                    #12 between 1 and 2
+        frame_record2.pack(side=TOP, fill=BOTH, pady=(0,10))
+        frame_record3 = Frame(frame_record)
+        frame_record3.pack(side=BOTTOM, fill=NONE)
 
         l_caption = Label(frame_record1, text="Record sound:")
-        l_caption.pack(side=LEFT);
+        l_caption.pack(side=LEFT)
         b_help = Button(frame_record1, text="info", width=3, height=1)
         b_help.pack(side=RIGHT)
 
+        self.l_selected_file_name_var = StringVar()
+        self.l_selected_file_name_var.set("[Selected file name:] none")
+
+        l_selected_file_name = Label(frame_record2, textvariable = self.l_selected_file_name_var, width = 25, height = 1, anchor = 'w')
+        l_selected_file_name.pack(side = LEFT)
+
+        self.b_waveform = Button(frame_record2, text = "WaveForm", width = 8, height = 1, command = lambda : Plot.plot_audio(self.selected_file_name, "raw"))
+        self.b_waveform.pack(side = RIGHT)
+        self.b_waveform['state'] = 'disabled'
+
+        self.b_fft = Button(frame_record2, text = "FFT", width = 8, height = 1, command = lambda : Plot.plot_audio(self.selected_file_name, "fft"))
+        self.b_fft.pack(side = RIGHT, padx = 3)
+        self.b_fft['state'] = 'disabled'
+
         global b_start
         global l_time
-        b_start = Button(frame_record2, text='Record', width=12, height=2, command=Controls.main_button_click)
+        b_start = Button(frame_record3, text='Record', width=12, height=2, command=Controls.main_button_click)
         b_start.pack(pady=10, padx=15, side=LEFT)
-        l_time = Label(frame_record2, height=1, width=5, state='disabled', bg='white', text='00:00', foreground='black')
+        l_time = Label(frame_record3, height=1, width=5, state='disabled', bg='white', text='00:00', foreground='black')
         l_time.pack(pady=10, padx=(10,0), side=LEFT)
-        l_status = Label(frame_record2, text="...recording", foreground='red')
+        l_status = Label(frame_record3, text="...recording", foreground='red')
         l_status.pack(pady=10, padx=(5,10), side=LEFT)
-        b_reset = Button(frame_record2, text='Reset', padx=2, command=Controls.reset_button_click)
+        b_reset = Button(frame_record3, text='Reset', padx=2, command=Controls.reset_button_click)
         b_reset.pack(pady=10, padx=20, side=LEFT)
 
     def create_presentation(self, root):
