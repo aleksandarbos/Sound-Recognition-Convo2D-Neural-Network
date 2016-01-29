@@ -1,15 +1,26 @@
-from Tkinter import *
 import tkFileDialog
+import threading
+
+from Tkinter import *
 from recorder import Recorder
 from plot import  Plot
 
+
 class Gui:
 
+    timer = None
+
     def __init__(self, root):
-        l_selected_file_name_var = StringVar()      # atributes of class
-        selected_file_name = ""
-        b_waveform = []
-        b_fft = []
+        self.l_selected_file_name_var = StringVar()      # variable for label dynamic text
+        self.l_timer_var = StringVar()
+
+        self.selected_file_name = ""                     # variable for storaging global selected file name
+        self.counter = 0                                 # clock counter
+
+        self.b_waveform = []                             # declaring plot buttons
+        self.b_fft = []
+        self.l_status = []
+
 
         menu_bar = Menu(root)
         file_menu = Menu(menu_bar, tearoff=0)
@@ -80,13 +91,15 @@ class Gui:
 
         global b_start
         global l_time
-        b_start = Button(frame_record3, text='Record', width=12, height=2, command=Controls.main_button_click)
+        b_start = Button(frame_record3, text='Record', width=12, height=2, command=lambda: self.main_button_click())
         b_start.pack(pady=10, padx=15, side=LEFT)
-        l_time = Label(frame_record3, height=1, width=5, state='disabled', bg='white', text='00:00', foreground='black')
+
+        self.l_timer_var.set('00:00')
+        l_time = Label(frame_record3, height=1, width=5, state='disabled', bg='white', textvariable=self.l_timer_var, foreground='black')
         l_time.pack(pady=10, padx=(10,0), side=LEFT)
         l_status = Label(frame_record3, text="...recording", foreground='red')
         l_status.pack(pady=10, padx=(5,10), side=LEFT)
-        b_reset = Button(frame_record3, text='Reset', padx=2, command=Controls.reset_button_click)
+        b_reset = Button(frame_record3, text='Reset', padx=2, command=self.reset_button_click())
         b_reset.pack(pady=10, padx=20, side=LEFT)
 
     def create_presentation(self, root):
@@ -110,21 +123,29 @@ class Gui:
         b_details = Button(frame_result, text='Details')
         b_details.pack(pady=10, padx=5, side=LEFT)
 
-    @staticmethod
-    def change_time(time):
-        l_time["text"] = time
-
-class Controls:
-    @staticmethod
-    def main_button_click():
-        if (b_start["text"] == "Record"):
-            b_start["text"] = "Analyze"
-            Recorder.start_recording()
+    def tick_timer(self):
+        timer = threading.Timer(1, self.tick_timer)
+        timer.start()
+        self.counter += 1
+        if self.counter > 9:
+            self.l_timer_var.set('00:' + str(self.counter))
         else:
-            b_start["text"] = "Record"
-            Plot.plot_audio("test.wav", "fft")
 
-    @staticmethod
-    def reset_button_click():
+            self.l_timer_var.set('00:0' + str(self.counter))
+
+        if self.counter > 5:                                    # 3 secs for duration of recording
+            timer.cancel()
+            self.counter = 0
+            self.l_timer_var.set('00:00')
+            return
+
+        print "tick..." + str(self.counter)
+
+    def main_button_click(self):
+        self.tick_timer()
+        Recorder.start_recording()
+
+
+    def reset_button_click(self):
         b_start["text"] = "Record"
-        Gui.change_time("00:00")
+        #Gui.change_time("00:00")
