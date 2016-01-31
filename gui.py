@@ -39,7 +39,9 @@ class Gui:
 
     def open_audio_file(self):
         sys.stdout.write("Searching for file...")
-        file_path = tkFileDialog.askopenfilename()
+        options = {}
+        options['filetypes'] = [('WAV audio files', '.wav')]
+        file_path = tkFileDialog.askopenfilename(**options)
         splitted_path = file_path.split('/')
         file_name = splitted_path[len(splitted_path)-1]
         self.selected_file_name = file_name         #global var, selected file_name
