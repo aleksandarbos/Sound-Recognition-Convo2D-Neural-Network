@@ -20,7 +20,9 @@ class Gui:
         self.b_waveform = []                             # declaring plot buttons
         self.b_fft = []
         self.l_status = []
+        self.full_file_path = []
 
+        self.radioIntVar = []                            # 2D or more dimensions plot
 
         menu_bar = Menu(root)
         file_menu = Menu(menu_bar, tearoff=0)
@@ -36,19 +38,25 @@ class Gui:
         self.root.mainloop()
 
 
+    def handleRadioSel(self):
+        if(self.radioIntVar.get() == 1):
+            self.b_spectrogram['state'] = 'active'
+        elif(self.radioIntVar.get() == 2):
+            self.b_spectrogram['state'] = 'disabled'
 
     def open_audio_file(self):
         sys.stdout.write("Searching for file...")
         options = {}
         options['filetypes'] = [('WAV audio files', '.wav')]
-        file_path = tkFileDialog.askopenfilename(**options)
-        splitted_path = file_path.split('/')
+        self.full_file_path = tkFileDialog.askopenfilename(**options)
+        splitted_path = self.full_file_path.split('/')
         file_name = splitted_path[len(splitted_path)-1]
         self.selected_file_name = file_name         #global var, selected file_name
         self.l_selected_file_name_var.set("[Selected file name]: " + self.selected_file_name)
 
         self.b_fft['state'] = 'active'         # enable plot buttons
         self.b_waveform['state'] = 'active'
+        self.b_spectrogram['state'] = 'active'
 
         print "\n[Selected file name:] " + file_name
 
@@ -58,8 +66,8 @@ class Gui:
 
 
     def create_window(self, root):
-        root.title("Soft Sound")
-        root.geometry("350x450")
+        root.title("Sound Recognition - Soft Computing")
+        root.geometry("550x450")
         root.resizable(height=FALSE, width=FALSE)
 
     def create_record(self, root):
@@ -80,16 +88,29 @@ class Gui:
         self.l_selected_file_name_var = StringVar()
         self.l_selected_file_name_var.set("[Selected file name:] none")
 
-        l_selected_file_name = Label(frame_record2, textvariable = self.l_selected_file_name_var, width = 25, height = 1, anchor = 'w')
+        l_selected_file_name = Label(frame_record2, textvariable = self.l_selected_file_name_var, width = 30, height = 1, anchor = 'w')
         l_selected_file_name.pack(side = LEFT)
 
-        self.b_waveform = Button(frame_record2, text = "WaveForm", width = 8, height = 1, command = lambda : Plot.plot_audio(self.selected_file_name, "raw"))
+        self.b_waveform = Button(frame_record2, text = "WaveForm", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "raw", self.radioIntVar))
         self.b_waveform.pack(side = RIGHT)
         self.b_waveform['state'] = 'disabled'
 
-        self.b_fft = Button(frame_record2, text = "FFT", width = 8, height = 1, command = lambda : Plot.plot_audio(self.selected_file_name, "fft"))
+        self.b_fft = Button(frame_record2, text = "FFT", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "fft", self.radioIntVar))
         self.b_fft.pack(side = RIGHT, padx = 3)
         self.b_fft['state'] = 'disabled'
+
+        self.b_spectrogram = Button(frame_record2, text = "Spectrogram", width = 10, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "spectrogram", self.radioIntVar))
+        self.b_spectrogram.pack(side = RIGHT, padx = 3)
+        self.b_spectrogram['state'] = 'disabled'
+
+        self.radioIntVar = IntVar()
+        R1 = Radiobutton(frame_record2, text="2D", variable=self.radioIntVar, value=1, command= lambda: self.handleRadioSel())
+        R1.pack( side = RIGHT)
+        self.radioIntVar.set(1)     # init 2D as default
+
+        R2 = Radiobutton(frame_record2, text="3D", variable=self.radioIntVar, value=2, command= lambda: self.handleRadioSel())
+        R2.pack( side = RIGHT)
+
 
         global b_start
         global l_time

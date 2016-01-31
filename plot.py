@@ -2,29 +2,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 import wave
 import sys
-from scipy.fftpack import fft
 from mpl_toolkits.mplot3d import Axes3D
+from scipy.fftpack import fft
 from matplotlib.collections import PolyCollection
 from matplotlib.colors import colorConverter
+from scipy import signal
 from decimal import *
+
 
 class Plot:
 
     sub_arrays = 6  # promenljiva koja daje broj podgrafika
 
+
     @staticmethod
-    def plot_raw_audio(signal):
-        dimensions=len(signal)
+    def plot_raw_audio(opened_signal):
+        dimensions=len(opened_signal)
         fig = plt.figure()
         ax = fig.gca(projection='3d')
         verts = []
         zs = range(Plot.sub_arrays)
 
         for z in zs:
-            ys = signal[z]
+            ys = opened_signal[z]
             ys[0] = 0           # kako bi pocetna i krajnja vrednost bile identicne..
             ys[len(ys)-1] = 0   # ..bitno utice da grafik izgleda normalno
-            xs = np.linspace(0.0, 1.0, num=len(signal[z]))
+            xs = np.linspace(0.0, 1.0, num=len(opened_signal[z]))
             verts.append(list(zip(xs, ys)))
 
         poly = PolyCollection(verts, facecolors=[colorConverter.to_rgba('r', alpha=0.6)])
@@ -36,15 +39,15 @@ class Plot:
         plt.show()
 
     @staticmethod
-    def plot_fft_audio(signal):
-        dimensions=len(signal)
+    def plot_fft_audio(opened_signal):
+        dimensions=len(opened_signal)
         fig = plt.figure()
         ax = fig.gca(projection='3d')
         verts = []
         zs = range(Plot.sub_arrays)
 
         for z in zs:
-            b=[(ele/2**8.)*2-1 for ele in signal[z]] # this is 8-bit track, b is now normalized on [-1,1)
+            b=[(ele/2**8.)*2-1 for ele in opened_signal[z]] # this is 8-bit track, b is now normalized on [-1,1)
             c = fft(b) # create a list of complex number
             d = 5000
             c[0] = 0            # kako bi pocetna i krajnja vrednost bile identicne..
@@ -63,14 +66,14 @@ class Plot:
         #savefig(filename+'.png',bbox_inches='tight')
 
     @staticmethod
-    def plot_audio(file_name, plot_type):
-        spf = wave.open(file_name,'r')
+    def plot_audio(full_file_path, plot_type, radioIntVar):
+        spf = wave.open(full_file_path,'r')
 
         #Extract Raw Audio from Wav File
-        signal = spf.readframes(-1)
-        signal = np.fromstring(signal, 'Int16')
+        opened_signal = spf.readframes(-1)
+        opened_signal = np.fromstring(opened_signal, 'Int16')
 
-        signal = np.array_split(signal, Plot.sub_arrays)
+        #opened_signal = np.array_split(opened_signal, Plot.sub_arrays)
 
         global fs
         fs = spf.getframerate()
@@ -80,8 +83,46 @@ class Plot:
             print 'Just mono files'
             sys.exit(0)
 
-        if(plot_type == "raw"):
-            Plot.plot_raw_audio(signal)
-        elif(plot_type == "fft"):
-            Plot.plot_fft_audio(signal)
+        if(radioIntVar.get() == 1):   # is 2D plot
+           if(plot_type == "raw"):
+               Plot.plot_raw_audio2D(opened_signal)
+           elif(plot_type == "fft"):
+               Plot.plot_fft_audio2D(opened_signal)
+           elif(plot_type == "spectrogram"):
+               Plot.plot_spectrogram2D(opened_signal)
+        elif(radioIntVar.get() == 2): #multi dimensional plot
+           opened_signal = np.array_split(opened_signal, Plot.sub_arrays)
+           if(plot_type == "raw"):
+               Plot.plot_raw_audio(opened_signal)
+           elif(plot_type == "fft"):
+               Plot.plot_fft_audio(opened_signal)
 
+
+    @staticmethod
+    def plot_fft_audio2D(opened_signal):
+        b=[(ele/2**8.)*2-1 for ele in opened_signal] # this is 8-bit track, b is now normalized on [-1,1)
+        c = fft(b) # create a list of complex number
+        #d = len(c)/2  # you only need half of the fft list
+        d = 5000
+        plt.title("2D FFT Signal Wave...")
+        plt.plot(abs(c[:(d-1)]),'r')
+        plt.show()
+        #savefig(filename+'.png',bbox_inches='tight')
+
+
+    @staticmethod
+    def plot_raw_audio2D(opened_signal):
+        Time=np.linspace(0, len(opened_signal)/fs, num=len(opened_signal))
+        plt.figure(1)
+        plt.title('2D Raw Signal Wave...')
+        plt.plot(Time, opened_signal)
+        plt.show()
+
+    @staticmethod
+    def plot_spectrogram2D(opened_signal):
+        # Compute and plot the spectrogram.
+        f, t, Sxx = signal.spectrogram(opened_signal, 10e3)
+        plt.pcolormesh(t, f, Sxx)
+        plt.ylabel('Frequency [Hz]')
+        plt.xlabel('Time [sec]')
+        plt.show()
