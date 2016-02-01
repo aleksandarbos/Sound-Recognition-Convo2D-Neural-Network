@@ -4,10 +4,13 @@ import wave
 import sys
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.fftpack import fft
+from scipy.interpolate import interp1d
 from matplotlib.collections import PolyCollection
 from matplotlib.colors import colorConverter
 from scipy import signal
 from decimal import *
+
+from sympy.physics.quantum.matrixutils import scipy_sparse_matrix
 
 
 class Plot:
@@ -119,10 +122,25 @@ class Plot:
         plt.show()
 
     @staticmethod
-    def plot_spectrogram2D(opened_signal):
+    def plot_spectrogram2Dv2(opened_signal):
         # Compute and plot the spectrogram.
         f, t, Sxx = signal.spectrogram(opened_signal, 10e3)
+        #print "len(t): " + str(len(t)) + ", len(f): " + str(len(f)) + ", len(Sxx): " + str(len(Sxx))
+        #print "ln - first index: " + str(np.log(f[1])) + ", last index: " + str(np.log(f[len(f)-1]))
+
+        # logf = interp1d(np.log(f[1]), np.log(f[len(f)]))
+        f[0] = 50.0
+
         plt.pcolormesh(t, f, Sxx)
-        plt.ylabel('Frequency [Hz]')
+        plt.ylabel('ln(Frequency [Hz])')
         plt.xlabel('Time [sec]')
+        plt.yscale('log')
+        #plt.axis([0,3,0,0.25])
         plt.show()
+
+    @staticmethod
+    def plot_spectrogram2D(opened_signal):  # verzija 2
+        # Compute and plot the spectrogram.
+        plt.specgram(opened_signal) # pogledati jos sve parametre
+        plt.show()
+

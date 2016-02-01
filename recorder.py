@@ -7,13 +7,13 @@ class Recorder:
     @staticmethod
     def start_recording():
         #WAVE_OUTPUT_FILENAME = "sound_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
-        record_seconds = 3                  # duration of recording
+        record_seconds = 5                  # duration of recording
         chunk = 1024
         channels = 1
         format = pyaudio.paInt16   # paInt8
         rate = 44100               # sample rate 44.1KHz
         file_output_name = "test.wav"
-        
+
         p = pyaudio.PyAudio()
 
         stream = p.open(format=format,
