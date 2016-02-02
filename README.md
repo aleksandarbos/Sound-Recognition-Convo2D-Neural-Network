@@ -21,3 +21,5 @@ Using sound samples for reaching your goal:
 ### Licence
 
 ### References
+
+    -http://www.frank-zalkow.de/en/code-snippets/create-audio-spectrograms-with-python.html
