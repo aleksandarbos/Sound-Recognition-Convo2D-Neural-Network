@@ -90,6 +90,8 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
     # odlicno radi...
     img_data = ImageTransform.fig2data(fig)
     img_data = ImageTransform.transform(img_data)
+    img_data = ImageTransform.image_bin(img_data)
+    img_data = ImageTransform.invert(img_data)
     plt.imshow(img_data, 'gray')
     plt.show()
 

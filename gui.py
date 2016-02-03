@@ -30,7 +30,7 @@ class Gui:
         self.root = root
         self.create_window(root)
         self.create_record(root)
-        self.create_presentation(root)
+        #self.create_presentation(root)             izbacen preview iz gui-a
         self.create_result(root)
         self.create_menu_bar(root, menu_bar, file_menu)
 
@@ -67,7 +67,7 @@ class Gui:
 
     def create_window(self, root):
         root.title("Sound Recognition - Soft Computing")
-        root.geometry("550x450")
+        root.geometry("550x200")
         root.resizable(height=FALSE, width=FALSE)
 
     def create_record(self, root):
@@ -136,7 +136,7 @@ class Gui:
 
     def create_result(self, root):
         frame_result = Frame(root)
-        frame_result.pack(side=BOTTOM, fill=BOTH)
+        frame_result.pack(fill=BOTH)
 
         l_result = Label(frame_result, text="Recognized sound:")
         l_result.pack(pady=10, padx=5, side=LEFT)
@@ -144,7 +144,7 @@ class Gui:
         t_result.pack(pady=10, padx=5, side=LEFT)
 
         b_details = Button(frame_result, text='Details')
-        b_details.pack(pady=10, padx=5, side=LEFT)
+        b_details.pack(pady=10, padx=5, side=RIGHT)
 
     def tick_timer(self):
         timer = threading.Timer(1, self.tick_timer)
@@ -156,7 +156,7 @@ class Gui:
 
             self.l_timer_var.set('00:0' + str(self.counter))
 
-        if self.counter > 5:                                    # 3 secs for duration of recording
+        if self.counter > 3:                                    # 3 secs for duration of recording
             timer.cancel()
             self.counter = 0
             self.l_timer_var.set('00:00')
@@ -167,6 +167,8 @@ class Gui:
     def main_button_click(self):
         self.tick_timer()
         Recorder.start_recording()
+        self.full_file_path = "test.wav"
+        self.l_selected_file_name_var.set("[Selected file name]: " + "test.wav")
 
 
     def reset_button_click(self):
