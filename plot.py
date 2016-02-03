@@ -9,6 +9,7 @@ from matplotlib.collections import PolyCollection
 from matplotlib.colors import colorConverter
 from scipy import signal
 from decimal import *
+from plot_way2 import plotstft
 
 from sympy.physics.quantum.matrixutils import scipy_sparse_matrix
 
@@ -92,7 +93,8 @@ class Plot:
            elif(plot_type == "fft"):
                Plot.plot_fft_audio2D(opened_signal)
            elif(plot_type == "spectrogram"):
-               Plot.plot_spectrogram2D(opened_signal)
+               #Plot.plot_spectrogram2D(opened_signal)
+                plotstft(full_file_path)
         elif(radioIntVar.get() == 2): #multi dimensional plot
            opened_signal = np.array_split(opened_signal, Plot.sub_arrays)
            if(plot_type == "raw"):
