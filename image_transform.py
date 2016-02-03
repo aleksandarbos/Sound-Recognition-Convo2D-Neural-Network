@@ -51,28 +51,25 @@ class ImageTransform:
         """ matlab plot to image data object """
     @staticmethod
     def fig2data (fig ):
-        """
-        @brief Convert a Matplotlib figure to a 4D numpy array with RGBA channels and return it
-        @param fig a matplotlib figure
-        @return a numpy 3D array of RGBA values
-        """
-
-        """ neispravno ... """
-
         # draw the renderer
         fig.canvas.draw ( )
 
-        # Get the RGBA buffer from the figure
-        w,h = fig.canvas.get_width_height()
-        buf = np.fromstring ( fig.canvas.tostring_argb(), dtype=np.uint8 )
-        buf.shape = ( w, h, 4 )
+        data = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8, sep='')
+        data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+        return data
 
-        # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
-        buf = np.roll ( buf, 3, axis = 2 )
-        return buf
+    @staticmethod
+    def crop_image(img, x1, x2, y1, y2):
+        #self.img = self.img[40:305, 80:470]
+        img = img[y1:y2, x1:x2]
+        return img
 
-    def transform(self):
-        "TODO: image transforming..."
+    @staticmethod
+    def transform(img):
+        img = ImageTransform.crop_image(img, 80,470, 40,305)
+        img = ImageTransform.image_gray(img)
+        return img
 
+    @staticmethod
     def show_image(self):
         self.img.show()

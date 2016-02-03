@@ -87,5 +87,11 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
 
     plt.clf()
 
+    # odlicno radi...
+    img_data = ImageTransform.fig2data(fig)
+    img_data = ImageTransform.transform(img_data)
+    plt.imshow(img_data, 'gray')
+    plt.show()
+
 
 #plotstft("test.wav")
