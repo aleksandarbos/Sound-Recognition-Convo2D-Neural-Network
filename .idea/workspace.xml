@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="397ebb27-9c23-4b9e-9012-6ea4871988d4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Aleksandar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image_transform.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plot_way2.py" afterPath="$PROJECT_DIR$/plot_way2.py" />
     </list>
@@ -36,14 +38,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot_way2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_way2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plot_way2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6464891">
-              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding>
-                <element signature="e#155#173#0" expanded="true" />
+                <element signature="e#154#175#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="image_transform.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/image_transform.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.8934624">
+              <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+              <folding>
+                <element signature="e#1#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Image.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda2/Lib/site-packages/PIL/Image.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2052" column="0" selection-start-line="2052" selection-start-column="0" selection-end-line="2052" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,6 +132,7 @@
         <option value="$PROJECT_DIR$/gui.py" />
         <option value="$PROJECT_DIR$/recorder.py" />
         <option value="$PROJECT_DIR$/plot.py" />
+        <option value="$PROJECT_DIR$/image_transform.py" />
         <option value="$PROJECT_DIR$/plot_way2.py" />
       </list>
     </option>
@@ -424,7 +449,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454497142979</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="FUN: Sredjen faktor skaliranja na freq log osi.">
+      <created>1454500861306</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1454500861306</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -470,7 +501,8 @@
     <MESSAGE value="GUI:&#10;1. Dodato dugme za pozivanje iscrtavanja spectrograma.&#10;2. Dodata radio grupa za izbor 2D ili 3D iscrtavanja grafika.&#10;FUN:&#10;1. U Plot.py dodato iscrtavanje spectrograma." />
     <MESSAGE value="FUN:&#10;1. Dodat novi nacin iscrtavanja spectrograma. (neohpodno ispitati jos sve patametre te metode plt.specgram(...))" />
     <MESSAGE value="FUN: 1. Novi plot za spektrogram, ispravljena vremenska skala i logaritamski rast frekvencije." />
-    <option name="LAST_COMMIT_MESSAGE" value="FUN: 1. Novi plot za spektrogram, ispravljena vremenska skala i logaritamski rast frekvencije." />
+    <MESSAGE value="FUN: Sredjen faktor skaliranja na freq log osi." />
+    <option name="LAST_COMMIT_MESSAGE" value="FUN: Sredjen faktor skaliranja na freq log osi." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.71590906" />
   </component>
   <component name="XDebuggerManager">
@@ -709,16 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/signal_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -737,12 +759,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda2/Lib/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2052" column="0" selection-start-line="2052" selection-start-column="0" selection-end-line="2052" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/plot_way2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6464891">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding>
-            <element signature="e#155#173#0" expanded="true" />
+            <element signature="e#154#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image_transform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8934624">
+          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>

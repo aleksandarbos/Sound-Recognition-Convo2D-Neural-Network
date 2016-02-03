@@ -2,26 +2,14 @@
 #coding: utf-8
 """ This work is licensed under a Creative Commons Attribution 3.0 Unported License.
     Frank Zalkow, 2012-2013 """
-
+from PIL import Image
 import numpy as np
-from matplotlib import pyplot as plt
 import scipy.io.wavfile as wav
+from matplotlib import pyplot as plt
 from numpy.lib import stride_tricks
+from image_transform import ImageTransform
 from scipy.interpolate import interp1d
 
-def make_interpolater(left_min, left_max, right_min, right_max):
-    # Figure out how 'wide' each range is
-    leftSpan = left_max - left_min
-    rightSpan = right_max - right_min
-
-    # Compute the scale factor between left and right values
-    scaleFactor = float(rightSpan) / float(leftSpan)
-
-    # create interpolation function using pre-calculated scaleFactor
-    def interp_fn(value):
-        return right_min + (value-left_min)*scaleFactor
-
-    return interp_fn
 
 """ short time fourier transform of audio signal """
 def stft(sig, frameSize, overlapFac=0.5, window=np.hanning):
@@ -77,7 +65,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
 
     timebins, freqbins = np.shape(ims)
 
-    plt.figure(figsize=(8, 4.25))
+    fig = plt.figure(figsize=(8, 4.25))
     plt.imshow(np.transpose(ims), origin="lower", aspect="auto", cmap=colormap, interpolation="none")
     plt.colorbar()
 
@@ -97,5 +85,10 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
         plt.show()
 
     plt.clf()
+
+    """ test klase ImageTransform
+    img_trans = ImageTransform(fig)
+    img_trans.show_image()
+    """
 
 #plotstft("test.wav")
