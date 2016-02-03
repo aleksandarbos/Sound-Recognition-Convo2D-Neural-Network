@@ -8,7 +8,8 @@ import scipy.io.wavfile as wav
 from matplotlib import pyplot as plt
 from numpy.lib import stride_tricks
 from image_transform import ImageTransform
-from scipy.interpolate import interp1d
+from scipy.spatial import distance
+
 
 
 """ short time fourier transform of audio signal """
@@ -86,9 +87,5 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
 
     plt.clf()
 
-    """ test klase ImageTransform
-    img_trans = ImageTransform(fig)
-    img_trans.show_image()
-    """
 
 #plotstft("test.wav")
