@@ -7,6 +7,21 @@ import numpy as np
 from matplotlib import pyplot as plt
 import scipy.io.wavfile as wav
 from numpy.lib import stride_tricks
+from scipy.interpolate import interp1d
+
+def make_interpolater(left_min, left_max, right_min, right_max):
+    # Figure out how 'wide' each range is
+    leftSpan = left_max - left_min
+    rightSpan = right_max - right_min
+
+    # Compute the scale factor between left and right values
+    scaleFactor = float(rightSpan) / float(leftSpan)
+
+    # create interpolation function using pre-calculated scaleFactor
+    def interp_fn(value):
+        return right_min + (value-left_min)*scaleFactor
+
+    return interp_fn
 
 """ short time fourier transform of audio signal """
 def stft(sig, frameSize, overlapFac=0.5, window=np.hanning):
@@ -57,7 +72,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
     samplerate, samples = wav.read(audiopath)
     s = stft(samples, binsize)
 
-    sshow, freq = logscale_spec(s, factor=1.0, sr=samplerate)
+    sshow, freq = logscale_spec(s, factor=13.0, sr=samplerate)
     ims = 20.*np.log10(np.abs(sshow)/10e-6) # amplitude to decibel
 
     timebins, freqbins = np.shape(ims)
@@ -67,7 +82,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
     plt.colorbar()
 
     plt.xlabel("Time [s]")
-    plt.ylabel("Frequency [Hz]")
+    plt.ylabel("Frequency dB[Hz]")
     plt.xlim([0, timebins-1])
     plt.ylim([0, freqbins])
 
