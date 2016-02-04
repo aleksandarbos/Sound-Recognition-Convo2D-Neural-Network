@@ -169,6 +169,7 @@ class Gui:
         Recorder.start_recording()
         self.full_file_path = "test.wav"
         self.l_selected_file_name_var.set("[Selected file name]: " + "test.wav")
+        self.b_spectrogram['state'] = 'active'
 
 
     def reset_button_click(self):

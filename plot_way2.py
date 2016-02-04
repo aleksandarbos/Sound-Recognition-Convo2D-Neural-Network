@@ -57,7 +57,7 @@ def logscale_spec(spec, sr=44100, factor=20.):
     return newspec, freqs
 
 """ plot spectrogram"""
-def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
+def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap="jet"
     samplerate, samples = wav.read(audiopath)
     s = stft(samples, binsize)
 
@@ -90,7 +90,13 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"):
     # odlicno radi...
     img_data = ImageTransform.fig2data(fig)
     img_data = ImageTransform.transform(img_data)
+    plt.imshow(img_data, 'gray')
+    plt.figure()
     img_data = ImageTransform.image_bin(img_data)
+    img_data = ImageTransform.invert(img_data)
+    img_data = ImageTransform.remove_noise(img_data)
+    img_data = ImageTransform.remove_noise(img_data)
+    img_data = ImageTransform.remove_noise(img_data)
     img_data = ImageTransform.invert(img_data)
     plt.imshow(img_data, 'gray')
     plt.show()

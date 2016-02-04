@@ -26,7 +26,7 @@ class ImageTransform:
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 100, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 120, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod
@@ -73,3 +73,19 @@ class ImageTransform:
     @staticmethod
     def show_image(self):
         self.img.show()
+
+    @staticmethod
+    def dilate(image):
+        kernel = np.ones((3,3)) # strukturni element 3x3 blok
+        return cv2.dilate(image, kernel, iterations=1)
+
+    @staticmethod
+    def erode(image):
+        kernel = np.ones((2,2)) # strukturni element 3x3 blok
+        return cv2.erode(image, kernel, iterations=1)
+
+    @staticmethod
+    def remove_noise(binary_image):
+        ret_val = ImageTransform.erode(ImageTransform.dilate(binary_image))
+        ret_val = ImageTransform.invert(ret_val)
+        return ret_val
