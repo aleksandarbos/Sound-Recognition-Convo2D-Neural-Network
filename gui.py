@@ -174,8 +174,6 @@ class Gui:
         self.l_selected_file_name_var.set("[Selected file name]: " + "test.wav")
         self.b_spectrogram['state'] = 'active'
 
-
-
     def reset_button_click(self):
         b_start["text"] = "Record"
 

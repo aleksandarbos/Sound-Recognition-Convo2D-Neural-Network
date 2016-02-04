@@ -95,6 +95,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     img_data = ImageTransform.image_bin(img_data)
     img_data = ImageTransform.invert(img_data)
     img_data = ImageTransform.remove_noise(img_data, times=5)
+    print "size of cropped image is : " + str(np.shape(img_data))
     plt.imshow(img_data, 'gray')
     plt.show()
 
