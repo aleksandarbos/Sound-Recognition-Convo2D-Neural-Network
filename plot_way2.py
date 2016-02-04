@@ -94,10 +94,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     plt.figure()
     img_data = ImageTransform.image_bin(img_data)
     img_data = ImageTransform.invert(img_data)
-    img_data = ImageTransform.remove_noise(img_data)
-    img_data = ImageTransform.remove_noise(img_data)
-    img_data = ImageTransform.remove_noise(img_data)
-    img_data = ImageTransform.invert(img_data)
+    img_data = ImageTransform.remove_noise(img_data, times=5)
     plt.imshow(img_data, 'gray')
     plt.show()
 

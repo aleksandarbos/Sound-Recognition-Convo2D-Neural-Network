@@ -26,7 +26,7 @@ class ImageTransform:
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 120, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 100, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod
@@ -60,13 +60,12 @@ class ImageTransform:
 
     @staticmethod
     def crop_image(img, x1, x2, y1, y2):
-        #self.img = self.img[40:305, 80:470]
         img = img[y1:y2, x1:x2]
         return img
 
     @staticmethod
     def transform(img):
-        img = ImageTransform.crop_image(img, 80,470, 40,305)
+        img = ImageTransform.crop_image(img, 125,475, 140,305)#posmatra se opseg od 0 - 5000 Hz
         img = ImageTransform.image_gray(img)
         return img
 
@@ -85,7 +84,7 @@ class ImageTransform:
         return cv2.erode(image, kernel, iterations=1)
 
     @staticmethod
-    def remove_noise(binary_image):
-        ret_val = ImageTransform.erode(ImageTransform.dilate(binary_image))
-        ret_val = ImageTransform.invert(ret_val)
+    def remove_noise(binary_image, times=1):
+        for i in range(0, times):
+            ret_val = ImageTransform.erode(ImageTransform.dilate(binary_image))
         return ret_val

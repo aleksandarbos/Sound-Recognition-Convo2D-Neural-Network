@@ -1,5 +1,6 @@
 import tkFileDialog
 import threading
+import winsound, sys
 
 from Tkinter import *
 from recorder import Recorder
@@ -158,6 +159,7 @@ class Gui:
 
         if self.counter > 3:                                    # 3 secs for duration of recording
             timer.cancel()
+            self.play_beep()
             self.counter = 0
             self.l_timer_var.set('00:00')
             return
@@ -165,6 +167,7 @@ class Gui:
         print "tick..." + str(self.counter)
 
     def main_button_click(self):
+        self.play_beep()
         self.tick_timer()
         Recorder.start_recording()
         self.full_file_path = "test.wav"
@@ -172,6 +175,9 @@ class Gui:
         self.b_spectrogram['state'] = 'active'
 
 
+
     def reset_button_click(self):
         b_start["text"] = "Record"
-        #Gui.change_time("00:00")
+
+    def play_beep(self):
+        winsound.PlaySound("beep.wav", winsound.SND_ALIAS)
