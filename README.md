@@ -1,4 +1,4 @@
-# Audio Recognition
+# Sound Recognition
 ## Using Neural Networks
 
 ### Summary
