@@ -25,17 +25,18 @@ class Gui:
 
         self.radioIntVar = []                            # 2D or more dimensions plot
 
-        menu_bar = Menu(root)
-        file_menu = Menu(menu_bar, tearoff=0)
+        self.menu_bar = Menu(root)
+        self.file_menu = Menu(self.menu_bar, tearoff=0)
+        self.nn_menu = Menu(self.menu_bar, tearoff=0)
 
         self.root = root
         self.create_window(root)
         self.create_record(root)
         #self.create_presentation(root)             izbacen preview iz gui-a
         self.create_result(root)
-        self.create_menu_bar(root, menu_bar, file_menu)
+        self.create_menu_bar(root)
 
-        self.root.config(menu=menu_bar)
+        self.root.config(menu=self.menu_bar)
         self.root.mainloop()
 
 
@@ -61,9 +62,13 @@ class Gui:
 
         print "\n[Selected file name:] " + file_name
 
-    def create_menu_bar(self, root, menu_bar, file_menu):
-        file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
-        menu_bar.add_cascade(label="File", menu=file_menu)
+    def create_menu_bar(self, root):
+        self.file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
+        self.menu_bar.add_cascade(label="File", menu=self.file_menu)
+
+        self.nn_menu.add_command(label = "Train")
+        self.nn_menu.add_command(label = "Save model weights")
+        self.menu_bar.add_cascade(label = "Neural Network", menu=self.nn_menu)
 
 
     def create_window(self, root):

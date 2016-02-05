@@ -9,7 +9,7 @@ from matplotlib.collections import PolyCollection
 from matplotlib.colors import colorConverter
 from scipy import signal
 from decimal import *
-from plot_way2 import plotstft
+from spectogram import plotstft
 
 from sympy.physics.quantum.matrixutils import scipy_sparse_matrix
 

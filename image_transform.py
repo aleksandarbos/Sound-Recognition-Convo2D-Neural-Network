@@ -22,11 +22,12 @@ class ImageTransform:
     @staticmethod
     def image_gray(image):
         return cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
     @staticmethod
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 100, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 105, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod
@@ -70,6 +71,11 @@ class ImageTransform:
         return img
 
     @staticmethod
+    def resize_graph(graph, x_dim = 28, y_dim = 28):
+        resized_graph = cv2.resize(graph,(x_dim, y_dim), interpolation = cv2.INTER_NEAREST)
+        return resized_graph
+
+    @staticmethod
     def show_image(self):
         self.img.show()
 
@@ -86,5 +92,5 @@ class ImageTransform:
     @staticmethod
     def remove_noise(binary_image, times=1):
         for i in range(0, times):
-            ret_val = ImageTransform.erode(ImageTransform.dilate(binary_image))
+            ret_val = ImageTransform.dilate(ImageTransform.erode(binary_image))
         return ret_val

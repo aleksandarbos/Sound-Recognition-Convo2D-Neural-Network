@@ -43,10 +43,14 @@ class NeuralNetwork:
         return image.flatten()
 
     @staticmethod
+    def scale_to_range(image):
+        return image / 255
+
+    @staticmethod
     def prepare_for_ann(bin_graphs):
         ready_for_ann = []
         for bin_graph in bin_graphs:
-            ready_for_ann.append(NeuralNetwork.matrix_to_vector(bin_graphs))
+            ready_for_ann.append(NeuralNetwork.matrix_to_vector(NeuralNetwork.scale_to_range(bin_graphs)))
         return ready_for_ann
 
     @staticmethod
@@ -56,4 +60,5 @@ class NeuralNetwork:
         outputs = NeuralNetwork.convert_output(alphabet)
         ann = NeuralNetwork.create_ann()
         ann = NeuralNetwork.train_ann(ann, inputs, outputs)
+
 

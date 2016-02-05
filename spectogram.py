@@ -5,6 +5,8 @@
 from PIL import Image
 import numpy as np
 import scipy.io.wavfile as wav
+import cv2
+
 from matplotlib import pyplot as plt
 from numpy.lib import stride_tricks
 from image_transform import ImageTransform
@@ -87,6 +89,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
 
     plt.clf()
 
+    """ -temp- deo samo za prikaz sta ce ici u obucavanje mreze... posle obrisati.."""
     # odlicno radi...
     img_data = ImageTransform.fig2data(fig)
     img_data = ImageTransform.transform(img_data)
@@ -94,10 +97,65 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     plt.figure()
     img_data = ImageTransform.image_bin(img_data)
     img_data = ImageTransform.invert(img_data)
-    img_data = ImageTransform.remove_noise(img_data, times=5)
-    print "size of cropped image is : " + str(np.shape(img_data))
+    img_data = ImageTransform.remove_noise(img_data) # zatvaranje 1.dilate 2.erode
+    img_data = ImageTransform.resize_graph(img_data, 70, 33) #org 350x165, 350%5=70, 165%5=33, odrzane proporcije
+    cv2.imwrite("test.png", img_data)
     plt.imshow(img_data, 'gray')
     plt.show()
 
+    return fig      # vrati matlabov plot obj(numpy array)
 
-#plotstft("test.wav")
+
+def prepare_fig_to_img(graph_fig):
+    """
+    @brief
+    Ulaz: matlabov grafik objekat
+    Matlabova figura postaje slika, nad slikom se vrsi
+    1. crop-ovanje
+    2. grayscale
+    3. binarizacija
+    4. uklanjanje suma
+    5. resize
+    Izlaz: slika spremna za obucavanje mreze
+    """
+    img_data = ImageTransform.fig2data(graph_fig)
+    img_data = ImageTransform.transform(img_data)
+    img_data = ImageTransform.image_bin(img_data)
+    img_data = ImageTransform.invert(img_data)
+    img_data = ImageTransform.remove_noise(img_data) # zatvaranje 1.dilate 2.erode
+    img_data = ImageTransform.resize_graph(img_data, 70, 33) #org 350x165, 350%5=70, 165%5=33, odrzane proporcije
+    return img_data
+
+def figs_to_img_prepare(asc_graphs_fig, desc_graphs_fig, flat_graphs_fig):
+    """
+    @brief
+    Ulaz: matlab grafici iz ASC, DESC, FLAT foldera, respektivno.
+    Funkcija koja matlabove fig objekte pretvara u numpy matrice- tj. img objekte
+    vrsi transformacije nad slikama i sprema ih za ulazni obucavajuci sloj n. mreze.
+    Izlaz: matrica 3xn koja se sadrzi od 3 kolone za svaki od tipova grafika.
+    """
+
+    asc_array = []
+    desc_array = []
+    flat_array = []
+
+    learning_array = []
+
+    for asc_fig in asc_graphs_fig:
+        asc_img = prepare_fig_to_img(asc_fig)
+        asc_array.append(asc_img)
+
+    for desc_fig in desc_graphs_fig:
+        desc_img = prepare_fig_to_img(desc_fig)
+        desc_array.append(desc_img)
+
+    for flat_fig in flat_graphs_fig:
+        flat_img = prepare_fig_to_img(flat_fig)
+        flat_array.append(flat_img)
+
+    learning_array[0]=asc_array;
+    learning_array[1]=desc_array;
+    learning_array[2]=flat_array;
+
+    return learning_array
+
