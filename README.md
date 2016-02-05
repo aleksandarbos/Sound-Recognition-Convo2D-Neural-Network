@@ -23,3 +23,4 @@ Using sound samples for reaching your goal:
 ### References
 
     -http://www.frank-zalkow.de/en/code-snippets/create-audio-spectrograms-with-python.html
+    -https://github.com/ftn-ai-lab/sc-2015
