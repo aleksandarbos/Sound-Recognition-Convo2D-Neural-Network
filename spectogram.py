@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 import scipy.io.wavfile as wav
 import cv2
+import os
 
 from matplotlib import pyplot as plt
 from numpy.lib import stride_tricks
@@ -63,7 +64,7 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     samplerate, samples = wav.read(audiopath)
     s = stft(samples, binsize)
 
-    sshow, freq = logscale_spec(s, factor=13.0, sr=samplerate)
+    sshow, freq = logscale_spec(s, factor=18.0, sr=samplerate)
     ims = 20.*np.log10(np.abs(sshow)/10e-6) # amplitude to decibel
 
     timebins, freqbins = np.shape(ims)
@@ -82,14 +83,16 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     ylocs = np.int16(np.round(np.linspace(0, freqbins-1, 20)))
     plt.yticks(ylocs, ["%.02f" % freq[i] for i in ylocs])
 
-    if plotpath:
-        plt.savefig(plotpath, bbox_inches="tight")
-    else:
-        plt.show()
+    #if plotpath:
+    #    plt.savefig(plotpath, bbox_inches="tight")
+    #else:
+    #    plt.show()
 
-    plt.clf()
+    #plt.clf()
 
-    """ -temp- deo samo za prikaz sta ce ici u obucavanje mreze... posle obrisati.."""
+    fig.canvas.draw()       # bitno!!! formira model grafika tj samu matricu grafika, ali je ne prikazuje korisniku!
+    plt.show()
+    """ -temp- deo samo za prikaz sta ce ici u obucavanje mreze... posle obrisati.. """
     # odlicno radi...
     img_data = ImageTransform.fig2data(fig)
     img_data = ImageTransform.transform(img_data)
@@ -103,7 +106,37 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     plt.imshow(img_data, 'gray')
     plt.show()
 
+    #img_data = prepare_fig_to_img(fig)      za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
+    #cv2.imwrite(plotpath, img_data)
+
     return fig      # vrati matlabov plot obj(numpy array)
+
+def read_data_set():
+    """
+    @brief
+    Funkcija koja ucitava sa standardnih direktorijuma data seta samples/ ASC,DESC,FLAT
+    ucitane .wav datoteke pretvara u matlab fig grafik objekte
+    Izlaz: liste ASC, DESC, FLAT matlab fig grafik objekata respektivno.
+    """
+
+    asc_fig_graphs = []
+    desc_fig_graphs = []
+    flat_fig_graphs = []
+
+    for asc_file in os.listdir("samples/ASC"):
+        if asc_file.endswith(".wav"):
+            asc_fig_graphs.append(plotstft("samples/ASC/" + asc_file))    # dodaj u ucitane matlabove fig objete
+
+    for desc_file in os.listdir("samples/DESC"):
+        if desc_file.endswith(".wav"):
+            desc_fig_graphs.append(plotstft("samples/DESC/" + desc_file))    # dodaj u ucitane matlabove fig objete
+
+    for flat_file in os.listdir("samples/FLAT"):
+        if flat_file.endswith(".wav"):
+            flat_fig_graphs.append(plotstft("samples/FLAT/" + flat_file))    # dodaj u ucitane matlabove fig objete
+
+    return asc_fig_graphs, desc_fig_graphs, flat_fig_graphs
+
 
 
 def prepare_fig_to_img(graph_fig):

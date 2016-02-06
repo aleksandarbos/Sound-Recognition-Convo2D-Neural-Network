@@ -5,6 +5,7 @@ import winsound, sys
 from Tkinter import *
 from recorder import Recorder
 from plot import  Plot
+from neural_network import NeuralNetwork
 
 
 class Gui:
@@ -66,7 +67,7 @@ class Gui:
         self.file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
 
-        self.nn_menu.add_command(label = "Train")
+        self.nn_menu.add_command(label = "Train", command = lambda: NeuralNetwork.train_nn())
         self.nn_menu.add_command(label = "Save model weights")
         self.menu_bar.add_cascade(label = "Neural Network", menu=self.nn_menu)
 

@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import collections
+import spectogram
 
 # keras
 from keras.models import Sequential
@@ -61,4 +62,10 @@ class NeuralNetwork:
         ann = NeuralNetwork.create_ann()
         ann = NeuralNetwork.train_ann(ann, inputs, outputs)
 
+    @staticmethod
+    def train_nn():
+       asc_fig_samples, desc_fig_samples, flat_fig_samples = spectogram.read_data_set() # ucitavanje sa diska u mat fig objekte s
+
+       # learning array 3xn matrica gotovih transf grafika spremih za obucavanje mreze
+       learning_array = spectogram.figs_to_img_prepare(asc_fig_samples, desc_fig_samples, flat_fig_samples) # perada fig->img, i transformacije nad img(spremni za obucavanje)
 

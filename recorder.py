@@ -12,6 +12,9 @@ class Recorder:
         channels = 1
         format = pyaudio.paInt16   # paInt8
         rate = 44100               # sample rate 44.1KHz
+        #file_output_name = "samples/ASC/" + "asc_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
+        #file_output_name = "samples/DESC/" + "desc_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
+        #file_output_name = "samples/FLAT/" + "flat_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
         file_output_name = "test.wav"
 
         p = pyaudio.PyAudio()
