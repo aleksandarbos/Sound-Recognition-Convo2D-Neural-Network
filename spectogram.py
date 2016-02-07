@@ -60,11 +60,15 @@ def logscale_spec(spec, sr=44100, factor=20.):
     return newspec, freqs
 
 """ plot spectrogram"""
-def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap="jet"
+def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colormap="jet"): #colormap="jet"
     samplerate, samples = wav.read(audiopath)
     s = stft(samples, binsize)
 
-    sshow, freq = logscale_spec(s, factor=18.0, sr=samplerate)
+    audio_path_split = audiopath.split('/')
+    plotpath = audio_path_split[0] + "/" + audio_path_split[1] + "/graphs/" + audio_path_split[2] # dodaj folder graphs u putanju za cuvanje grafika
+    plotpath = plotpath.replace('.wav', '.png')            # zameni ekstenziju fajla na .png
+
+    sshow, freq = logscale_spec(s, factor=50.0, sr=samplerate)
     ims = 20.*np.log10(np.abs(sshow)/10e-6) # amplitude to decibel
 
     timebins, freqbins = np.shape(ims)
@@ -91,51 +95,55 @@ def plotstft(audiopath, binsize=2**10, plotpath=None, colormap="jet"): #colormap
     #plt.clf()
 
     fig.canvas.draw()       # bitno!!! formira model grafika tj samu matricu grafika, ali je ne prikazuje korisniku!
-    plt.show()
-    """ -temp- deo samo za prikaz sta ce ici u obucavanje mreze... posle obrisati.. """
-    # odlicno radi...
-    img_data = ImageTransform.fig2data(fig)
-    img_data = ImageTransform.transform(img_data)
-    plt.imshow(img_data, 'gray')
-    plt.figure()
-    img_data = ImageTransform.image_bin(img_data)
-    img_data = ImageTransform.invert(img_data)
-    img_data = ImageTransform.remove_noise(img_data) # zatvaranje 1.dilate 2.erode
-    img_data = ImageTransform.resize_graph(img_data, 70, 33) #org 350x165, 350%5=70, 165%5=33, odrzane proporcije
-    cv2.imwrite("test.png", img_data)
-    plt.imshow(img_data, 'gray')
-    plt.show()
 
-    #img_data = prepare_fig_to_img(fig)      za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
+    if not(generatefig):
+        plt.show()
+        """ -temp- deo samo za prikaz sta ce ici u obucavanje mreze... posle obrisati.. """
+        # odlicno radi...
+        img_data = ImageTransform.fig2data(fig)
+        img_data = ImageTransform.transform(img_data)
+        plt.imshow(img_data, 'gray')
+        plt.figure()
+        img_data = ImageTransform.image_bin(img_data)
+        img_data = ImageTransform.invert(img_data)
+        img_data = ImageTransform.remove_noise(img_data) # zatvaranje 1.dilate 2.erode
+        img_data = ImageTransform.resize_graph(img_data, 70, 33) #org 350x165, 350%5=70, 165%5=33, odrzane proporcije
+        cv2.imwrite("test.png", img_data)
+        plt.imshow(img_data, 'gray')
+        plt.show()
+
+    #img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
     #cv2.imwrite(plotpath, img_data)
 
     return fig      # vrati matlabov plot obj(numpy array)
 
-def read_data_set():
+def create_data_set_graphs():
     """
     @brief
     Funkcija koja ucitava sa standardnih direktorijuma data seta samples/ ASC,DESC,FLAT
-    ucitane .wav datoteke pretvara u matlab fig grafik objekte
-    Izlaz: liste ASC, DESC, FLAT matlab fig grafik objekata respektivno.
+    ucitane .wav datoteke pretvara u png grafike koji se nalaze u samples/graphs/ ASC,DESC,FLAT
     """
-
-    asc_fig_graphs = []
-    desc_fig_graphs = []
-    flat_fig_graphs = []
 
     for asc_file in os.listdir("samples/ASC"):
         if asc_file.endswith(".wav"):
-            asc_fig_graphs.append(plotstft("samples/ASC/" + asc_file))    # dodaj u ucitane matlabove fig objete
+            fig = plotstft("samples/ASC/" + asc_file, generatefig=True)
+            asc_file = asc_file.replace('.wav', '.png')
+            img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
+            cv2.imwrite("samples/ASC/graphs/" + asc_file, img_data)
 
     for desc_file in os.listdir("samples/DESC"):
         if desc_file.endswith(".wav"):
-            desc_fig_graphs.append(plotstft("samples/DESC/" + desc_file))    # dodaj u ucitane matlabove fig objete
+            fig = plotstft("samples/DESC/" + desc_file, generatefig=True)
+            desc_file = desc_file.replace('.wav', '.png')
+            img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
+            cv2.imwrite("samples/DESC/graphs/" + desc_file, img_data)
 
     for flat_file in os.listdir("samples/FLAT"):
         if flat_file.endswith(".wav"):
-            flat_fig_graphs.append(plotstft("samples/FLAT/" + flat_file))    # dodaj u ucitane matlabove fig objete
-
-    return asc_fig_graphs, desc_fig_graphs, flat_fig_graphs
+            fig = plotstft("samples/FLAT/" + flat_file, generatefig=True)
+            flat_file = flat_file.replace('.wav', '.png')
+            img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
+            cv2.imwrite("samples/FLAT/graphs/" + flat_file, img_data)
 
 
 
@@ -149,7 +157,7 @@ def prepare_fig_to_img(graph_fig):
     3. binarizacija
     4. uklanjanje suma
     5. resize
-    Izlaz: slika spremna za obucavanje mreze
+    Izlaz: slika spremna za obucavanje mreze (numpy matrica)
     """
     img_data = ImageTransform.fig2data(graph_fig)
     img_data = ImageTransform.transform(img_data)
@@ -159,36 +167,28 @@ def prepare_fig_to_img(graph_fig):
     img_data = ImageTransform.resize_graph(img_data, 70, 33) #org 350x165, 350%5=70, 165%5=33, odrzane proporcije
     return img_data
 
-def figs_to_img_prepare(asc_graphs_fig, desc_graphs_fig, flat_graphs_fig):
+def load_data_set_graphs():
     """
     @brief
-    Ulaz: matlab grafici iz ASC, DESC, FLAT foldera, respektivno.
-    Funkcija koja matlabove fig objekte pretvara u numpy matrice- tj. img objekte
-    vrsi transformacije nad slikama i sprema ih za ulazni obucavajuci sloj n. mreze.
-    Izlaz: matrica 3xn koja se sadrzi od 3 kolone za svaki od tipova grafika.
+    Funkcija koja ucitava sa standardnih direktorijuma data seta samples/graphs/ ASC,DESC,FLAT
+    ucitane .png datoteke pretvara numpy matrice spremne za dalji rad
+    Izlaz: 3 matrice: ASC 1xn matrica img objekta , DESC 1xn matrica img objekta , FLAT 1xn matrica img objekta
     """
 
-    asc_array = []
-    desc_array = []
-    flat_array = []
+    asc_graphs_array = []
+    desc_graphs_array = []
+    flat_graphs_array = []
 
-    learning_array = []
+    for asc_file in os.listdir("samples/ASC/graphs/"):
+        if asc_file.endswith(".png"):
+            asc_graphs_array.append(img_data = cv2.imread("samples/ASC/graphs/" + asc_file))
 
-    for asc_fig in asc_graphs_fig:
-        asc_img = prepare_fig_to_img(asc_fig)
-        asc_array.append(asc_img)
+    for desc_file in os.listdir("samples/DESC/graphs/"):
+        if desc_file.endswith(".png"):
+            desc_graphs_array.append(img_data = cv2.imread("samples/DESC/graphs/" + desc_file))
 
-    for desc_fig in desc_graphs_fig:
-        desc_img = prepare_fig_to_img(desc_fig)
-        desc_array.append(desc_img)
+    for flat_file in os.listdir("samples/FLAT/graphs/"):
+        if flat_file.endswith(".png"):
+            flat_graphs_array.append(img_data = cv2.imread("samples/FLAT/graphs/" + flat_file))
 
-    for flat_fig in flat_graphs_fig:
-        flat_img = prepare_fig_to_img(flat_fig)
-        flat_array.append(flat_img)
-
-    learning_array[0]=asc_array;
-    learning_array[1]=desc_array;
-    learning_array[2]=flat_array;
-
-    return learning_array
-
+    return asc_graphs_array, desc_graphs_array, flat_graphs_array

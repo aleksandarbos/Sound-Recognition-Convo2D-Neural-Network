@@ -27,7 +27,7 @@ class ImageTransform:
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 105, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 90, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod
@@ -71,7 +71,7 @@ class ImageTransform:
         return img
 
     @staticmethod
-    def resize_graph(graph, x_dim = 28, y_dim = 28):
+    def resize_graph(graph, x_dim = 70, y_dim = 33):
         resized_graph = cv2.resize(graph,(x_dim, y_dim), interpolation = cv2.INTER_NEAREST)
         return resized_graph
 

@@ -1,6 +1,7 @@
 import tkFileDialog
 import threading
 import winsound, sys
+import spectogram
 
 from Tkinter import *
 from recorder import Recorder
@@ -28,6 +29,7 @@ class Gui:
 
         self.menu_bar = Menu(root)
         self.file_menu = Menu(self.menu_bar, tearoff=0)
+        self.ds_menu = Menu(self.menu_bar, tearoff=0)
         self.nn_menu = Menu(self.menu_bar, tearoff=0)
 
         self.root = root
@@ -66,6 +68,9 @@ class Gui:
     def create_menu_bar(self, root):
         self.file_menu.add_command(label = "Open audio file", command = self.open_audio_file)
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
+
+        self.ds_menu.add_command(label = "Generate graphics", command = lambda: spectogram.create_data_set_graphs())
+        self.menu_bar.add_cascade(label = "Data-Set", menu=self.ds_menu)
 
         self.nn_menu.add_command(label = "Train", command = lambda: NeuralNetwork.train_nn())
         self.nn_menu.add_command(label = "Save model weights")

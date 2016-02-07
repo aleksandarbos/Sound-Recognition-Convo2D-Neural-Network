@@ -6,7 +6,6 @@ class Recorder:
 
     @staticmethod
     def start_recording():
-        #WAVE_OUTPUT_FILENAME = "sound_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav"
         record_seconds = 3                 # duration of recording
         chunk = 1024
         channels = 1

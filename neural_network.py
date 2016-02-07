@@ -56,7 +56,7 @@ class NeuralNetwork:
 
     @staticmethod
     def create_and_train_nn(bin_graphs):     # bin_graphs - ulazni niz grafika, kao numpy matrice
-        alphabet = ['ASC','FLAT','DESC']     # uzlazni, ravan, opadajuci signal
+        alphabet = ['ASC','DESC','FLAT']     # uzlazni, opadajuci, ravan signal
         inputs = NeuralNetwork.prepare_for_ann(bin_graphs)
         outputs = NeuralNetwork.convert_output(alphabet)
         ann = NeuralNetwork.create_ann()
@@ -64,8 +64,11 @@ class NeuralNetwork:
 
     @staticmethod
     def train_nn():
-       asc_fig_samples, desc_fig_samples, flat_fig_samples = spectogram.read_data_set() # ucitavanje sa diska u mat fig objekte s
+       graphs_set = []
 
-       # learning array 3xn matrica gotovih transf grafika spremih za obucavanje mreze
-       learning_array = spectogram.figs_to_img_prepare(asc_fig_samples, desc_fig_samples, flat_fig_samples) # perada fig->img, i transformacije nad img(spremni za obucavanje)
+       asc_img_samples, desc_img_samples, flat_img_samples = spectogram.load_data_set_graphs() # ucitavanje sa diska u numpy matrice (img objekte)
 
+       graphs_set[0] = asc_img_samples
+       graphs_set[1] = desc_img_samples
+       graphs_set[2] = flat_img_samples
+       # TODO: preostaje obucavanje.. create_and_train_nn(graphs_set)
