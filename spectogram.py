@@ -115,8 +115,8 @@ def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colorma
         plt.imshow(img_data, 'gray')
         plt.show()
 
-    #img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
-    #cv2.imwrite(plotpath, img_data)
+    img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
+    cv2.imwrite(plotpath, img_data)
 
     return fig      # vrati matlabov plot obj(numpy array)
 

@@ -198,7 +198,3 @@ class Gui:
 
     def play_beep(self):
         winsound.PlaySound("beep.wav", winsound.SND_ALIAS)
-
-    @staticmethod
-    def print_predict(value):
-        Gui.t_result.insert('1.0', value)

@@ -27,7 +27,7 @@ class ImageTransform:
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 110, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 100, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod

@@ -37,13 +37,9 @@ class NeuralNetwork:
         ann.compile(loss='mean_squared_error', optimizer=sgd)
 
         # obucavanje neuronske mreze
-        ann.fit(X_train, y_train, nb_epoch=1, batch_size=1, verbose = 1, shuffle=False, show_accuracy = True)
+        ann.fit(X_train, y_train, nb_epoch=100, batch_size=1, verbose = 1, shuffle=True, show_accuracy = True)
 
         return ann
-
-    @staticmethod
-    def convert_output(outputs):
-        return np.eye(len(outputs))
 
     @staticmethod
     def prepare_for_ann(bin_graphs, batch=True): # batch govori da li vise grafika spremam za mrezu ili samo 1 (vise za training, 1 za predict)
@@ -100,7 +96,7 @@ class NeuralNetwork:
 
     @staticmethod
     def winner(output): # output je vektor sa izlaza neuronske mreze
-        return max(enumerate(output), key=lambda x: x[1])[0]
+        return np.argmax(output)
 
     @staticmethod
     def display_result(outputs, alphabet):
@@ -110,11 +106,11 @@ class NeuralNetwork:
     def predict_results():
         spectogram.plotstft('test.wav', generatefig=True)
         test_img = cv2.imread('test.png')
+        cv2.imshow('test.png', test_img)
         inputs_test = NeuralNetwork.prepare_for_ann(test_img, batch=False) # samo jednu sliku pripremam
         results_test = NeuralNetwork.ann.predict(np.array(inputs_test, np.float32))
-        print "[Prediction results]: " + NeuralNetwork.display_result(results_test, NeuralNetwork.alphabet)
-        gui.Gui.print_predict("[Prediction results]: " + NeuralNetwork.display_result(results_test, NeuralNetwork.alphabet))
-
+        print "ASC: " + str(results_test[0,0]) + ", DESC: " + str(results_test[0,1]) + ", FLAT: " + str(results_test[0, 2])
+        print "[Winner]: " + NeuralNetwork.display_result(results_test, NeuralNetwork.alphabet)
 
     @staticmethod
     def load_model_weights():
