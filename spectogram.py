@@ -65,10 +65,13 @@ def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colorma
     s = stft(samples, binsize)
 
     audio_path_split = audiopath.split('/')
-    plotpath = audio_path_split[0] + "/" + audio_path_split[1] + "/graphs/" + audio_path_split[2] # dodaj folder graphs u putanju za cuvanje grafika
-    plotpath = plotpath.replace('.wav', '.png')            # zameni ekstenziju fajla na .png
+    if len(audio_path_split)-1 > 0:
+        plotpath = audio_path_split[0] + "/" + audio_path_split[1] + "/graphs/" + audio_path_split[2] # dodaj folder graphs u putanju za cuvanje grafika
+        plotpath = plotpath.replace('.wav', '.png')            # zameni ekstenziju fajla na .png
 
-    sshow, freq = logscale_spec(s, factor=50.0, sr=samplerate)
+    plotpath = audiopath.replace('.wav', '.png')
+
+    sshow, freq = logscale_spec(s, factor=100.0, sr=samplerate)
     ims = 20.*np.log10(np.abs(sshow)/10e-6) # amplitude to decibel
 
     timebins, freqbins = np.shape(ims)
@@ -181,14 +184,17 @@ def load_data_set_graphs():
 
     for asc_file in os.listdir("samples/ASC/graphs/"):
         if asc_file.endswith(".png"):
-            asc_graphs_array.append(img_data = cv2.imread("samples/ASC/graphs/" + asc_file))
+            img_data = cv2.imread("samples/ASC/graphs/" + asc_file)
+            asc_graphs_array.append(img_data)
 
     for desc_file in os.listdir("samples/DESC/graphs/"):
         if desc_file.endswith(".png"):
-            desc_graphs_array.append(img_data = cv2.imread("samples/DESC/graphs/" + desc_file))
+            img_data = cv2.imread("samples/DESC/graphs/" + desc_file)
+            desc_graphs_array.append(img_data)
 
     for flat_file in os.listdir("samples/FLAT/graphs/"):
         if flat_file.endswith(".png"):
-            flat_graphs_array.append(img_data = cv2.imread("samples/FLAT/graphs/" + flat_file))
+            img_data = cv2.imread("samples/FLAT/graphs/" + flat_file)
+            flat_graphs_array.append(img_data)
 
     return asc_graphs_array, desc_graphs_array, flat_graphs_array

@@ -2,24 +2,30 @@ import numpy as np
 import cv2
 import collections
 import spectogram
+import json
+import gui
 
 # keras
 from keras.models import Sequential
 from keras.layers.core import Dense,Activation
 from keras.optimizers import SGD
+from keras.datasets import mnist
+from keras.utils import np_utils
+from keras.models import model_from_json
 
+from _tkinter import *
 
 class NeuralNetwork:
 
-    def __init__(self):
-        self.a = []
+    ann = None
+    alphabet = ['ASC', 'DESC', 'FLAT']
 
     @staticmethod
     def create_ann():
-        ann = Sequential()
-        ann.add(Dense(9625, input_dim=57750, activation='sigmoid')) # 165x350 je croppovana slika = 165*350=57750, skriveni sloj 128neurona
-        ann.add(Dense(3, activation='sigmoid')) # izlazni sloj od 3 neurona
-        return ann
+        NeuralNetwork.ann = Sequential()
+        NeuralNetwork.ann.add(Dense(770, input_dim=2310, activation='sigmoid')) # 70x33 je croppovana slika = 70*33=, skriveni sloj 128neurona
+        NeuralNetwork.ann.add(Dense(3, activation='sigmoid')) # izlazni sloj od 3 neurona
+        return NeuralNetwork.ann
 
     @staticmethod
     def train_ann(ann, X_train, y_train):
@@ -31,7 +37,7 @@ class NeuralNetwork:
         ann.compile(loss='mean_squared_error', optimizer=sgd)
 
         # obucavanje neuronske mreze
-        ann.fit(X_train, y_train, nb_epoch=500, batch_size=1, verbose = 0, shuffle=False, show_accuracy = False)
+        ann.fit(X_train, y_train, nb_epoch=1, batch_size=1, verbose = 1, shuffle=False, show_accuracy = True)
 
         return ann
 
@@ -40,35 +46,77 @@ class NeuralNetwork:
         return np.eye(len(outputs))
 
     @staticmethod
-    def matrix_to_vector(image):
-        return image.flatten()
-
-    @staticmethod
-    def scale_to_range(image):
-        return image / 255
-
-    @staticmethod
-    def prepare_for_ann(bin_graphs):
+    def prepare_for_ann(bin_graphs, batch=True): # batch govori da li vise grafika spremam za mrezu ili samo 1 (vise za training, 1 za predict)
         ready_for_ann = []
-        for bin_graph in bin_graphs:
-            ready_for_ann.append(NeuralNetwork.matrix_to_vector(NeuralNetwork.scale_to_range(bin_graphs)))
-        return ready_for_ann
+        if batch:
+            for bin_graph in bin_graphs:# deo primeme za training
+                bb = bin_graph[:,:,0]
+                bb = bb.flatten()
+                bb /= 255
+                ready_for_ann.append(bb)
+        else:                           # deo pripreme za predict...
+            bb = bin_graphs[:,:,0]
+            bb = bb.flatten()
+            bb /= 255
+            ready_for_ann.append(bb)
+        return np.array(ready_for_ann)
 
     @staticmethod
-    def create_and_train_nn(bin_graphs):     # bin_graphs - ulazni niz grafika, kao numpy matrice
-        alphabet = ['ASC','DESC','FLAT']     # uzlazni, opadajuci, ravan signal
-        inputs = NeuralNetwork.prepare_for_ann(bin_graphs)
-        outputs = NeuralNetwork.convert_output(alphabet)
-        ann = NeuralNetwork.create_ann()
-        ann = NeuralNetwork.train_ann(ann, inputs, outputs)
+    def create_and_train_nn():     # bin_graphs - ulazni niz grafika, kao numpy matrice
+        #alphabet = ['ASC','DESC','FLAT']     # uzlazni, opadajuci, ravan signal
+        NeuralNetwork.ann = NeuralNetwork.create_ann()
+        asc_img_samples, desc_img_samples, flat_img_samples = spectogram.load_data_set_graphs() # ucitavanje sa diska u numpy matrice (img objekte)
+
+        X_train = np.concatenate((asc_img_samples, desc_img_samples, flat_img_samples), axis=0)
+        y_train = np.array([0])
+
+        X_train = X_train.astype('float32')
+        X_train = NeuralNetwork.prepare_for_ann(X_train) # slozi u binarni oblik i vektorki oblik slike
+
+        #objasni mrezi koja slika je koja onim redosledom koji je u X_train
+        y1_seg = []
+        y2_seg = []
+        y3_seg = []
+
+        for i in range(0, len(asc_img_samples)):
+            y1_seg.append(0) #ASC
+
+        for i in range(0, len(desc_img_samples)):
+            y2_seg.append(1) #DESC
+
+        for i in range(0, len(flat_img_samples)):
+            y3_seg.append(2) #FLAT
+
+        y_train = np.concatenate((y1_seg, y2_seg, y3_seg), axis=0)
+        y_train = y_train.astype('float32')
+        y_train = np_utils.to_categorical(y_train, 3) # broj kasa na koje se rastavlja je 3
+
+        NeuralNetwork.ann = NeuralNetwork.train_ann(NeuralNetwork.ann, X_train, y_train)
+        json_string = NeuralNetwork.ann.to_json()
+        with open('model_weights.json', 'w') as outfile:
+            json.dump(json_string, outfile)
+        NeuralNetwork.ann.save_weights('my_model_weights.h5', overwrite=True)
+
 
     @staticmethod
-    def train_nn():
-       graphs_set = []
+    def winner(output): # output je vektor sa izlaza neuronske mreze
+        return max(enumerate(output), key=lambda x: x[1])[0]
 
-       asc_img_samples, desc_img_samples, flat_img_samples = spectogram.load_data_set_graphs() # ucitavanje sa diska u numpy matrice (img objekte)
+    @staticmethod
+    def display_result(outputs, alphabet):
+        return alphabet[NeuralNetwork.winner(outputs)]
 
-       graphs_set[0] = asc_img_samples
-       graphs_set[1] = desc_img_samples
-       graphs_set[2] = flat_img_samples
-       # TODO: preostaje obucavanje.. create_and_train_nn(graphs_set)
+    @staticmethod
+    def predict_results():
+        spectogram.plotstft('test.wav', generatefig=True)
+        test_img = cv2.imread('test.png')
+        inputs_test = NeuralNetwork.prepare_for_ann(test_img, batch=False) # samo jednu sliku pripremam
+        results_test = NeuralNetwork.ann.predict(np.array(inputs_test, np.float32))
+        print "[Prediction results]: " + NeuralNetwork.display_result(results_test, NeuralNetwork.alphabet)
+        gui.Gui.print_predict("[Prediction results]: " + NeuralNetwork.display_result(results_test, NeuralNetwork.alphabet))
+
+
+    @staticmethod
+    def load_model_weights():
+       NeuralNetwork.ann = model_from_json("model.json")
+       NeuralNetwork.ann.load_weights('my_model_weights.h5')

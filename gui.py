@@ -16,6 +16,8 @@ class Gui:
     def __init__(self, root):
         self.l_selected_file_name_var = StringVar()      # variable for label dynamic text
         self.l_timer_var = StringVar()
+        self.t_result_str_var = StringVar()
+
 
         self.selected_file_name = ""                     # variable for storaging global selected file name
         self.counter = 0                                 # clock counter
@@ -72,8 +74,8 @@ class Gui:
         self.ds_menu.add_command(label = "Generate graphics", command = lambda: spectogram.create_data_set_graphs())
         self.menu_bar.add_cascade(label = "Data-Set", menu=self.ds_menu)
 
-        self.nn_menu.add_command(label = "Train", command = lambda: NeuralNetwork.train_nn())
-        self.nn_menu.add_command(label = "Save model weights")
+        self.nn_menu.add_command(label = "Train", command = lambda: NeuralNetwork.create_and_train_nn())
+        self.nn_menu.add_command(label = "Load last model weights", command=lambda : NeuralNetwork.load_model_weights())
         self.menu_bar.add_cascade(label = "Neural Network", menu=self.nn_menu)
 
 
@@ -152,8 +154,14 @@ class Gui:
 
         l_result = Label(frame_result, text="Recognized sound:")
         l_result.pack(pady=10, padx=5, side=LEFT)
-        t_result = Text(frame_result, height=1, width=20, state='disabled')
+
+        self.t_result_str_var.set("Output is in console..")
+
+        t_result = Label(frame_result, height=1, width=20, textvariable=self.t_result_str_var, bg="white")
         t_result.pack(pady=10, padx=5, side=LEFT)
+
+        b_predict = Button(frame_result, text='Predict', command= lambda: NeuralNetwork.predict_results())
+        b_predict.pack(pady=10, padx=5, side=LEFT)
 
         b_details = Button(frame_result, text='Details')
         b_details.pack(pady=10, padx=5, side=RIGHT)
@@ -190,3 +198,7 @@ class Gui:
 
     def play_beep(self):
         winsound.PlaySound("beep.wav", winsound.SND_ALIAS)
+
+    @staticmethod
+    def print_predict(value):
+        Gui.t_result.insert('1.0', value)
