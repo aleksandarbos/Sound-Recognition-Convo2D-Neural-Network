@@ -94,7 +94,7 @@ class Plot:
                Plot.plot_fft_audio2D(opened_signal)
            elif(plot_type == "spectrogram"):
                #Plot.plot_spectrogram2D(opened_signal)
-                plotstft(full_file_path)
+                plotstft(full_file_path, generatefig=False)
         elif(radioIntVar.get() == 2): #multi dimensional plot
            opened_signal = np.array_split(opened_signal, Plot.sub_arrays)
            if(plot_type == "raw"):

@@ -14,6 +14,7 @@ class Recorder:
         #file_output_name = "samples/ASC/" + "asc_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
         #file_output_name = "samples/DESC/" + "desc_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
         #file_output_name = "samples/FLAT/" + "flat_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
+        #file_output_name = "samples/SOY/" + "soy_" + datetime.now().strftime("%Y%m%d_%H%M%S") + ".wav" # za dataset
         file_output_name = "test.wav"
 
         p = pyaudio.PyAudio()

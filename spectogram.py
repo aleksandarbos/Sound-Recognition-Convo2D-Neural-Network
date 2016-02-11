@@ -60,7 +60,7 @@ def logscale_spec(spec, sr=44100, factor=20.):
     return newspec, freqs
 
 """ plot spectrogram"""
-def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colormap="jet"): #colormap="jet"
+def plotstft(audiopath, generatefig=True, binsize=2**10, plotpath=None, colormap="jet"): #colormap="jet"
     samplerate, samples = wav.read(audiopath)
     s = stft(samples, binsize)
 
@@ -71,7 +71,7 @@ def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colorma
 
     plotpath = audiopath.replace('.wav', '.png')
 
-    sshow, freq = logscale_spec(s, factor=100.0, sr=samplerate)
+    sshow, freq = logscale_spec(s, factor=80.0, sr=samplerate)
     ims = 20.*np.log10(np.abs(sshow)/10e-6) # amplitude to decibel
 
     timebins, freqbins = np.shape(ims)
@@ -85,15 +85,10 @@ def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colorma
     plt.xlim([0, timebins-1])
     plt.ylim([0, freqbins])
 
-    xlocs = np.float32(np.linspace(0, timebins-1, 5))
+    xlocs = np.float32(np.linspace(0, timebins-1, 10))
     plt.xticks(xlocs, ["%.02f" % l for l in ((xlocs*len(samples)/timebins)+(0.5*binsize))/samplerate])
     ylocs = np.int16(np.round(np.linspace(0, freqbins-1, 20)))
     plt.yticks(ylocs, ["%.02f" % freq[i] for i in ylocs])
-
-    #if plotpath:
-    #    plt.savefig(plotpath, bbox_inches="tight")
-    #else:
-    #    plt.show()
 
     #plt.clf()
 
@@ -114,9 +109,9 @@ def plotstft(audiopath, generatefig=False, binsize=2**10, plotpath=None, colorma
         cv2.imwrite("test.png", img_data)
         plt.imshow(img_data, 'gray')
         plt.show()
-
-    img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
-    cv2.imwrite(plotpath, img_data)
+    else:
+        img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
+        cv2.imwrite(plotpath, img_data)
 
     return fig      # vrati matlabov plot obj(numpy array)
 
@@ -148,6 +143,14 @@ def create_data_set_graphs():
             img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
             cv2.imwrite("samples/FLAT/graphs/" + flat_file, img_data)
 
+    for soy_file in os.listdir("samples/SOY"):
+        if soy_file.endswith(".wav"):
+            fig = plotstft("samples/SOY/" + soy_file, generatefig=True)
+            soy_file = soy_file.replace('.wav', '.png')
+            img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
+            cv2.imwrite("samples/SOY/graphs/" + soy_file, img_data)
+
+
 
 
 def prepare_fig_to_img(graph_fig):
@@ -175,12 +178,13 @@ def load_data_set_graphs():
     @brief
     Funkcija koja ucitava sa standardnih direktorijuma data seta samples/graphs/ ASC,DESC,FLAT
     ucitane .png datoteke pretvara numpy matrice spremne za dalji rad
-    Izlaz: 3 matrice: ASC 1xn matrica img objekta , DESC 1xn matrica img objekta , FLAT 1xn matrica img objekta
+    Izlaz: 4 matrice: ASC 1xn matrica img objekta , DESC 1xn matrica img objekta , FLAT 1xn matrica img objekta, SOY 1xn matrica img objekta
     """
 
     asc_graphs_array = []
     desc_graphs_array = []
     flat_graphs_array = []
+    soy_graphs_array = []
 
     for asc_file in os.listdir("samples/ASC/graphs/"):
         if asc_file.endswith(".png"):
@@ -197,4 +201,10 @@ def load_data_set_graphs():
             img_data = cv2.imread("samples/FLAT/graphs/" + flat_file)
             flat_graphs_array.append(img_data)
 
-    return asc_graphs_array, desc_graphs_array, flat_graphs_array
+    for soy_file in os.listdir("samples/SOY/graphs/"):
+        if soy_file.endswith(".png"):
+            img_data = cv2.imread("samples/SOY/graphs/" + soy_file)
+            soy_graphs_array.append(img_data)
+
+
+    return asc_graphs_array, desc_graphs_array, flat_graphs_array, soy_graphs_array
