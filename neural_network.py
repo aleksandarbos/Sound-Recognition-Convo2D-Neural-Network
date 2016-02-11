@@ -114,5 +114,11 @@ class NeuralNetwork:
 
     @staticmethod
     def load_model_weights():
-       NeuralNetwork.ann = model_from_json("model.json")
+       print "Creating neural network..."
+       NeuralNetwork.create_ann()
+       print "Compiling neural network..."
+       sgd = SGD(lr=0.01, momentum=0.9)
+       NeuralNetwork.ann.compile(loss='mean_squared_error', optimizer=sgd)
+       print "Loading neural network model weights..."
        NeuralNetwork.ann.load_weights('my_model_weights.h5')
+       print "Neural network successfully loaded!"
