@@ -105,72 +105,75 @@ class ImageTransform:
         image_path_arr = image_path.split('/')
         image_dir_loc = ""
 
+        image_file_name = image_path_arr[len(image_path_arr)-1]
+        image_file_name = image_file_name.strip('.png')
+
         for i in range(0, len(image_path_arr)-1):
-            image_dir_loc = image_dir_loc + image_path_arr[i]
+            image_dir_loc = image_dir_loc + image_path_arr[i] + "/"
 
         # x+ translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,i+1*10],[0,1,0]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_x_plus_'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_x_plus_'+str(i)+".png", dst)
 
         # x- translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,-i*10],[0,1,0]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_x_minus_'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_x_minus_'+str(i)+".png", dst)
 
         # y+ translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,0],[0,1,i+3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_plus_'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_'+str(i)+".png", dst)
 
         # y- translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,0],[0,1,i-3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_minus_'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_'+str(i)+".png", dst)
 
         # x+ y- translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,i*10],[0,1,i-3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_minus_x_plus'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_x_plus_'+str(i)+".png", dst)
 
         # x+ y+ translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,i*10],[0,1,i+3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_plus_x_plus'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_x_plus_'+str(i)+".png", dst)
 
         # x- y- translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,-i*10],[0,1,i-3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_minus_x_minus'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_x_minus_'+str(i)+".png", dst)
 
         # x- y+ translating... time invariance
         for i in range(1, 3):
             M = np.float32([[1,0,-i*10],[0,1,i+3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
-            cv2.imwrite(image_dir_loc+'/test_y_plus_x_minus'+str(i)+".png", dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_x_minus_'+str(i)+".png", dst)
 
     @staticmethod
     def gen_dataset_augmens():
         for asc_file in os.listdir("samples/ASC/graphs/"):
             if asc_file.endswith(".png"):
-                ImageTransform.image_augm_translate(asc_file)
+                ImageTransform.image_augm_translate("samples/ASC/graphs/"+asc_file)
 
         for desc_file in os.listdir("samples/DESC/graphs/"):
             if desc_file.endswith(".png"):
-                ImageTransform.image_augm_translate(desc_file)
+                ImageTransform.image_augm_translate("samples/DESC/graphs/"+desc_file)
 
         for flat_file in os.listdir("samples/FLAT/graphs/"):
             if flat_file.endswith(".png"):
-                ImageTransform.image_augm_translate(flat_file)
+                ImageTransform.image_augm_translate("samples/FLAT/graphs/"+flat_file)
 
         for soy_file in os.listdir("samples/SOY/graphs/"):
             if soy_file.endswith(".png"):
-                ImageTransform.image_augm_translate(soy_file)
+                ImageTransform.image_augm_translate("samples/SOY/graphs/"+soy_file)
 
