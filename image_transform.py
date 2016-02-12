@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pylab as pylab
 import cv2
 import matplotlib.pyplot as plt
+import os
 
 from PIL import Image
 
@@ -94,3 +95,82 @@ class ImageTransform:
         for i in range(0, times):
             ret_val = ImageTransform.dilate(ImageTransform.erode(binary_image))
         return ret_val
+
+
+    @staticmethod
+    def image_augm_translate(image_path):
+        img = cv2.imread(image_path,0)
+        rows,cols = img.shape
+
+        image_path_arr = image_path.split('/')
+        image_dir_loc = ""
+
+        for i in range(0, len(image_path_arr)-1):
+            image_dir_loc = image_dir_loc + image_path_arr[i]
+
+        # x+ translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,i+1*10],[0,1,0]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_x_plus_'+str(i)+".png", dst)
+
+        # x- translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,-i*10],[0,1,0]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_x_minus_'+str(i)+".png", dst)
+
+        # y+ translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,0],[0,1,i+3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_plus_'+str(i)+".png", dst)
+
+        # y- translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,0],[0,1,i-3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_minus_'+str(i)+".png", dst)
+
+        # x+ y- translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,i*10],[0,1,i-3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_minus_x_plus'+str(i)+".png", dst)
+
+        # x+ y+ translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,i*10],[0,1,i+3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_plus_x_plus'+str(i)+".png", dst)
+
+        # x- y- translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,-i*10],[0,1,i-3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_minus_x_minus'+str(i)+".png", dst)
+
+        # x- y+ translating... time invariance
+        for i in range(1, 3):
+            M = np.float32([[1,0,-i*10],[0,1,i+3]])
+            dst = cv2.warpAffine(img,M,(cols,rows))
+            cv2.imwrite(image_dir_loc+'/test_y_plus_x_minus'+str(i)+".png", dst)
+
+    @staticmethod
+    def gen_dataset_augmens():
+        for asc_file in os.listdir("samples/ASC/graphs/"):
+            if asc_file.endswith(".png"):
+                ImageTransform.image_augm_translate(asc_file)
+
+        for desc_file in os.listdir("samples/DESC/graphs/"):
+            if desc_file.endswith(".png"):
+                ImageTransform.image_augm_translate(desc_file)
+
+        for flat_file in os.listdir("samples/FLAT/graphs/"):
+            if flat_file.endswith(".png"):
+                ImageTransform.image_augm_translate(flat_file)
+
+        for soy_file in os.listdir("samples/SOY/graphs/"):
+            if soy_file.endswith(".png"):
+                ImageTransform.image_augm_translate(soy_file)
+

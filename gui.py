@@ -7,6 +7,7 @@ from Tkinter import *
 from recorder import Recorder
 from plot import  Plot
 from neural_network import NeuralNetwork
+from image_transform import ImageTransform
 
 
 class Gui:
@@ -72,6 +73,7 @@ class Gui:
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
 
         self.ds_menu.add_command(label = "Generate graphics", command = lambda: spectogram.create_data_set_graphs())
+        self.ds_menu.add_command(label = "Graphics augmentation", command = lambda: ImageTransform.gen_dataset_augmens())
         self.menu_bar.add_cascade(label = "Data-Set", menu=self.ds_menu)
 
         self.nn_menu.add_command(label = "Train", command = lambda: NeuralNetwork.create_and_train_nn())
