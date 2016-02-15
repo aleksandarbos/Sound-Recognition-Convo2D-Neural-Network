@@ -2,9 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="397ebb27-9c23-4b9e-9012-6ea4871988d4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/my_model_weights - backup.h5" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/training_log.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/samples/DESC/Rec_2016-02-10_16.12.53.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.53.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_model_weights.h5" afterPath="$PROJECT_DIR$/my_model_weights.h5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.25.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.25.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.34.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.34.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.42.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.42.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.48.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.48.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.55.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.10.55.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.00.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.00.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.07.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.07.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.13.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.19.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.19.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.25.png" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Rec_2016-02-10_16.11.25.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Thumbs.db" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Thumbs.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.00.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.00.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.07.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.07.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.13.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.19.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.19.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.25.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.25.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.37.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.37.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.42.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.42.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.48.png" afterPath="$PROJECT_DIR$/samples/DESC/graphs/Rec_2016-02-10_16.12.48.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.08.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.08.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.14.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.14.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.25.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.25.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.30.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.30.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.35.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.35.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.45.png" afterPath="$PROJECT_DIR$/samples/FLAT/graphs/Rec_2016-02-10_16.13.45.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/image_transform.py" afterPath="$PROJECT_DIR$/image_transform.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spectogram.py" afterPath="$PROJECT_DIR$/spectogram.py" />
     </list>
     <ignored path="soft-projekat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +59,8 @@
         <entry file="file://$PROJECT_DIR$/gui.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="34" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,8 +68,8 @@
       <file leaf-file-name="neural_network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/neural_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0405728">
-              <caret line="124" column="74" selection-start-line="124" selection-start-column="74" selection-end-line="124" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.50119334">
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -77,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/spectogram.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <caret line="110" column="18" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
               <folding>
                 <element signature="e#154#175#0" expanded="true" />
               </folding>
@@ -99,7 +127,7 @@
         <entry file="file://$PROJECT_DIR$/image_transform.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+              <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -111,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/recorder.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -146,12 +174,12 @@
         <option value="$PROJECT_DIR$/plot_way2.py" />
         <option value="$PROJECT_DIR$/keras_test.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/recorder.py" />
         <option value="$PROJECT_DIR$/neural_network.py" />
         <option value="$PROJECT_DIR$/plot.py" />
-        <option value="$PROJECT_DIR$/spectogram.py" />
         <option value="$PROJECT_DIR$/gui.py" />
         <option value="$PROJECT_DIR$/image_transform.py" />
+        <option value="$PROJECT_DIR$/recorder.py" />
+        <option value="$PROJECT_DIR$/spectogram.py" />
       </list>
     </option>
   </component>
@@ -205,7 +233,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -240,7 +268,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -589,12 +617,18 @@
       <option name="project" value="LOCAL" />
       <updated>1455275505246</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="FUN: Ispravljene putanje cuvanja augmentovanih podataka iz Data-Set-a.">
+      <created>1455279148848</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1455279148848</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -654,7 +688,8 @@
     <MESSAGE value="FUN: Uspesno napravljeno ucitavanje tezina modela sa diska." />
     <MESSAGE value="FUN: Dodata cetvrta klasa prepoznavanja SOY - Shame On You! Kao i njeni izgenerisani grafici i semplovi u Data set." />
     <MESSAGE value="GUI: Dodata opicja Data-Set-&gt;Generate augments, koja kupi sve izgenerisane grafike na osnovu semplova, i radi geometrijske transformacije (trans X,Y kombinovano itd...) &#10;FUN: U ImageTransform dodate funkcije za geometrijske transformacije nad slikom." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI: Dodata opicja Data-Set-&gt;Generate augments, koja kupi sve izgenerisane grafike na osnovu semplova, i radi geometrijske transformacije (trans X,Y kombinovano itd...) &#10;FUN: U ImageTransform dodate funkcije za geometrijske transformacije nad slikom." />
+    <MESSAGE value="FUN: Ispravljene putanje cuvanja augmentovanih podataka iz Data-Set-a." />
+    <option name="LAST_COMMIT_MESSAGE" value="FUN: Ispravljene putanje cuvanja augmentovanih podataka iz Data-Set-a." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.71590906" />
   </component>
   <component name="XDebuggerManager">
@@ -721,9 +756,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -731,9 +764,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -741,9 +772,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -791,9 +820,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="108" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -817,9 +844,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="108" column="56" selection-start-line="108" selection-start-column="56" selection-end-line="108" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -843,9 +868,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -869,9 +892,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -895,9 +916,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,14 +1069,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recorder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1066,40 +1077,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui.py">
+    <entry file="file://$PROJECT_DIR$/recorder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="34" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spectogram.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding>
-            <element signature="e#154#175#0" expanded="true" />
-          </folding>
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/image_transform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spectogram.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="18" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
+          <folding>
+            <element signature="e#154#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/neural_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0405728">
-          <caret line="124" column="74" selection-start-line="124" selection-start-column="74" selection-end-line="124" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.50119334">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

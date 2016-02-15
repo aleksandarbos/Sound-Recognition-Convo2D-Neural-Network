@@ -28,7 +28,7 @@ class ImageTransform:
     def image_bin(image_gs):
         height, width = image_gs.shape[0:2]
         image_binary = np.ndarray((height, width), dtype=np.uint8)
-        ret,image_bin = cv2.threshold(image_gs, 100, 255, cv2.THRESH_BINARY)
+        ret,image_bin = cv2.threshold(image_gs, 110, 255, cv2.THRESH_BINARY)
         return image_bin
 
     @staticmethod
@@ -125,39 +125,53 @@ class ImageTransform:
 
         # y+ translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,0],[0,1,i+3]])
+            M = np.float32([[1,0,0],[0,1,i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_'+str(i)+".png", dst)
 
         # y- translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,0],[0,1,i-3]])
+            M = np.float32([[1,0,0],[0,1,-i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_'+str(i)+".png", dst)
 
         # x+ y- translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,i*10],[0,1,i-3]])
+            M = np.float32([[1,0,i*10],[0,1,-i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_x_plus_'+str(i)+".png", dst)
 
         # x+ y+ translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,i*10],[0,1,i+3]])
+            M = np.float32([[1,0,i*10],[0,1,i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_x_plus_'+str(i)+".png", dst)
 
         # x- y- translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,-i*10],[0,1,i-3]])
+            M = np.float32([[1,0,-i*10],[0,1,-i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_minus_x_minus_'+str(i)+".png", dst)
 
         # x- y+ translating... time invariance
         for i in range(1, 3):
-            M = np.float32([[1,0,-i*10],[0,1,i+3]])
+            M = np.float32([[1,0,-i*10],[0,1,i*3]])
             dst = cv2.warpAffine(img,M,(cols,rows))
+            dst = ImageTransform.resize_graph(dst) # vrati na org...
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_y_plus_x_minus_'+str(i)+".png", dst)
+        """
+        # stetching scaleX+
+        for i in range(1, 3):
+            dst = cv2.resize(img,None,fx=1+i*0.5, fy=1, interpolation = cv2.INTER_CUBIC)
+            #dst = ImageTransform.resize_graph(dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_scalex_plus_'+str(i)+".png", dst)
+
+        # stetching scaleX-
+        for i in range(1, 3):
+            dst = cv2.resize(img,None,fx=1-i*0.5, fy=1, interpolation = cv2.INTER_CUBIC)
+            #dst = ImageTransform.resize_graph(dst)
+            cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_scalex_minus_'+str(i)+".png", dst)
+        """
 
     @staticmethod
     def gen_dataset_augmens():

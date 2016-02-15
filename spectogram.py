@@ -113,6 +113,7 @@ def plotstft(audiopath, generatefig=True, binsize=2**10, plotpath=None, colormap
         img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
         cv2.imwrite(plotpath, img_data)
 
+
     return fig      # vrati matlabov plot obj(numpy array)
 
 def create_data_set_graphs():
