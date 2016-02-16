@@ -25,17 +25,17 @@ class Recorder:
                         input=True,
                         frames_per_buffer=chunk) #buffer
 
-        print("* recording")
+        print("\n* recording")
 
         frames = []
 
         end_value = int(rate / chunk * record_seconds) + 1
-        print end_value
+
         for i in range(0, end_value):
             data = stream.read(chunk)
             frames.append(data) # 2 bytes(16 bits) per channel
 
-        print("* done recording")
+        print("* done recording\n")
 
         wf = wave.open(file_output_name, 'wb')
         wf.setnchannels(channels)

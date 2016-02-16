@@ -99,6 +99,9 @@ class ImageTransform:
 
     @staticmethod
     def image_augm_translate(image_path):
+
+        print "\nAugmenting Data-Set graphs...."
+
         img = cv2.imread(image_path,0)
         rows,cols = img.shape
 
@@ -172,6 +175,9 @@ class ImageTransform:
             #dst = ImageTransform.resize_graph(dst)
             cv2.imwrite(image_dir_loc+'/'+image_file_name+'_aug_scalex_minus_'+str(i)+".png", dst)
         """
+
+        print "Data-Set graphs augmented successfully!\n"
+
 
     @staticmethod
     def gen_dataset_augmens():

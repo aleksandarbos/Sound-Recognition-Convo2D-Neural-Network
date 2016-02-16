@@ -8,6 +8,7 @@ from recorder import Recorder
 from plot import  Plot
 from neural_network import NeuralNetwork
 from image_transform import ImageTransform
+from display_output import  Display
 
 
 class Gui:
@@ -35,12 +36,21 @@ class Gui:
         self.ds_menu = Menu(self.menu_bar, tearoff=0)
         self.nn_menu = Menu(self.menu_bar, tearoff=0)
 
+        self.frame_record = ""
+        self.frame_record1 = ""
+        self.frame_record2 = ""
+        self.frame_record3 = ""
+
         self.root = root
         self.create_window(root)
         self.create_record(root)
-        #self.create_presentation(root)             izbacen preview iz gui-a
         self.create_result(root)
         self.create_menu_bar(root)
+
+        self.create_presentation(root)             #izbacen preview iz gui-a
+
+        self.disp = ""
+
 
         self.root.config(menu=self.menu_bar)
         self.root.mainloop()
@@ -83,72 +93,67 @@ class Gui:
 
     def create_window(self, root):
         root.title("Sound Recognition - Soft Computing")
-        root.geometry("550x200")
+        root.geometry("550x580")
         root.resizable(height=FALSE, width=FALSE)
 
     def create_record(self, root):
-        frame_record = Frame(root)
-        frame_record.pack(side=TOP, fill=BOTH, pady=(0,5))
-        frame_record1 = Frame(frame_record)
-        frame_record1.pack(side=TOP, fill=BOTH, pady=(0,10))
-        frame_record2 = Frame(frame_record)                    #12 between 1 and 2
-        frame_record2.pack(side=TOP, fill=BOTH, pady=(0,10))
-        frame_record3 = Frame(frame_record)
-        frame_record3.pack(side=BOTTOM, fill=NONE)
+        self.frame_record = Frame(root)
+        self.frame_record.pack(side=TOP, fill=BOTH, pady=(0,5))
+        self.frame_record1 = Frame(self.frame_record)
+        self.frame_record1.pack(side=TOP, fill=BOTH, pady=(0,10))
+        self.frame_record2 = Frame(self.frame_record)                    #12 between 1 and 2
+        self.frame_record2.pack(side=TOP, fill=BOTH, pady=(0,10))
+        self.frame_record3 = Frame(self.frame_record)
+        self.frame_record3.pack(side=BOTTOM, fill=NONE)
 
-        l_caption = Label(frame_record1, text="Record sound:")
+        l_caption = Label(self.frame_record1, text="Record sound:")
         l_caption.pack(side=LEFT)
-        b_help = Button(frame_record1, text="info", width=3, height=1)
+        b_help = Button(self.frame_record1, text="info", width=3, height=1)
         b_help.pack(side=RIGHT)
 
         self.l_selected_file_name_var = StringVar()
         self.l_selected_file_name_var.set("[Selected file name:] none")
 
-        l_selected_file_name = Label(frame_record2, textvariable = self.l_selected_file_name_var, width = 30, height = 1, anchor = 'w')
+        l_selected_file_name = Label(self.frame_record2, textvariable = self.l_selected_file_name_var, width = 30, height = 1, anchor = 'w')
         l_selected_file_name.pack(side = LEFT)
 
-        self.b_waveform = Button(frame_record2, text = "WaveForm", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "raw", self.radioIntVar))
+        self.b_waveform = Button(self.frame_record2, text = "WaveForm", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "raw", self.radioIntVar))
         self.b_waveform.pack(side = RIGHT)
         self.b_waveform['state'] = 'disabled'
 
-        self.b_fft = Button(frame_record2, text = "FFT", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "fft", self.radioIntVar))
+        self.b_fft = Button(self.frame_record2, text = "FFT", width = 8, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "fft", self.radioIntVar))
         self.b_fft.pack(side = RIGHT, padx = 3)
         self.b_fft['state'] = 'disabled'
 
-        self.b_spectrogram = Button(frame_record2, text = "Spectrogram", width = 10, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "spectrogram", self.radioIntVar))
+        self.b_spectrogram = Button(self.frame_record2, text = "Spectrogram", width = 10, height = 1, command = lambda : Plot.plot_audio(self.full_file_path, "spectrogram", self.radioIntVar))
         self.b_spectrogram.pack(side = RIGHT, padx = 3)
         self.b_spectrogram['state'] = 'disabled'
 
         self.radioIntVar = IntVar()
-        R1 = Radiobutton(frame_record2, text="2D", variable=self.radioIntVar, value=1, command= lambda: self.handleRadioSel())
+        R1 = Radiobutton(self.frame_record2, text="2D", variable=self.radioIntVar, value=1, command= lambda: self.handleRadioSel())
         R1.pack( side = RIGHT)
         self.radioIntVar.set(1)     # init 2D as default
 
-        R2 = Radiobutton(frame_record2, text="3D", variable=self.radioIntVar, value=2, command= lambda: self.handleRadioSel())
+        R2 = Radiobutton(self.frame_record2, text="3D", variable=self.radioIntVar, value=2, command= lambda: self.handleRadioSel())
         R2.pack( side = RIGHT)
 
 
         global b_start
         global l_time
-        b_start = Button(frame_record3, text='Record', width=12, height=2, command=lambda: self.main_button_click())
+        b_start = Button(self.frame_record3, text='Record', width=12, height=2, command=lambda: self.main_button_click())
         b_start.pack(pady=10, padx=15, side=LEFT)
 
         self.l_timer_var.set('00:00')
-        l_time = Label(frame_record3, height=1, width=5, state='disabled', bg='white', textvariable=self.l_timer_var, foreground='black')
+        l_time = Label(self.frame_record3, height=1, width=5, state='disabled', bg='white', textvariable=self.l_timer_var, foreground='black')
         l_time.pack(pady=10, padx=(10,0), side=LEFT)
-        l_status = Label(frame_record3, text="...recording", foreground='red')
+        l_status = Label(self.frame_record3, text="...recording", foreground='red')
         l_status.pack(pady=10, padx=(5,10), side=LEFT)
-        b_reset = Button(frame_record3, text='Reset', padx=2, command=self.reset_button_click())
+        b_reset = Button(self.frame_record3, text='Reset', padx=2, command=self.reset_button_click())
         b_reset.pack(pady=10, padx=20, side=LEFT)
 
     def create_presentation(self, root):
-        frame_presentation = Frame(root, bd=4, bg='red')
-        frame_presentation.pack(side=TOP, fill=BOTH)
-        frame_presentation2 = Frame(frame_presentation, pady=135)
-        frame_presentation2.pack(side=TOP, fill=BOTH)
-
-        l_resulttt = Label(frame_presentation2, text="(here be picture)")
-        l_resulttt.pack()
+        self.disp = Display(self.frame_record)
+        self.disp.pack()
 
     def create_result(self, root):
         frame_result = Frame(root)
@@ -200,3 +205,4 @@ class Gui:
 
     def play_beep(self):
         winsound.PlaySound("beep.wav", winsound.SND_ALIAS)
+

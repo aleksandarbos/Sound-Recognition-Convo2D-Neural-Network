@@ -122,6 +122,7 @@ def create_data_set_graphs():
     Funkcija koja ucitava sa standardnih direktorijuma data seta samples/ ASC,DESC,FLAT
     ucitane .wav datoteke pretvara u png grafike koji se nalaze u samples/graphs/ ASC,DESC,FLAT
     """
+    print "\nCreating graphs from Data-Set samples..."
 
     for asc_file in os.listdir("samples/ASC"):
         if asc_file.endswith(".wav"):
@@ -151,6 +152,7 @@ def create_data_set_graphs():
             img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ...
             cv2.imwrite("samples/SOY/graphs/" + soy_file, img_data)
 
+    print "Graphs successfully created! \n"
 
 
 
