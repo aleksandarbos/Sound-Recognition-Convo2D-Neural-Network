@@ -12,6 +12,8 @@ from keras.optimizers import SGD
 from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import model_from_json
+from keras.layers.core import Dense, Dropout, Activation, Flatten
+from keras.layers.convolutional import Convolution2D, MaxPooling2D
 
 from _tkinter import *
 
@@ -23,6 +25,7 @@ class NeuralNetwork:
     @staticmethod
     def create_ann():
         NeuralNetwork.ann = Sequential()
+
         NeuralNetwork.ann.add(Dense(770, input_dim=2310, activation='sigmoid')) # 70x33 je croppovana slika = 70*33=, skriveni sloj 128neurona
         NeuralNetwork.ann.add(Dense(4, activation='sigmoid')) # izlazni sloj od 4 neurona
         return NeuralNetwork.ann
