@@ -155,6 +155,12 @@ class Gui:
         self.disp = Display(self.frame_record)
         self.disp.pack()
 
+        print "==================INSTRUCTIONS==================="
+        print "1. Load Neural Network weights model..."
+        print "2. Hit *Record* button and wait 1 sec after Beep signal, then start whistling..."
+        print "3. Hit *Predict* button and check the results..."
+        print "================================================\n"
+
     def create_result(self, root):
         frame_result = Frame(root)
         frame_result.pack(fill=BOTH)

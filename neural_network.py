@@ -37,7 +37,7 @@ class NeuralNetwork:
         ann.compile(loss='mean_squared_error', optimizer=sgd)
 
         # obucavanje neuronske mreze
-        ann.fit(X_train, y_train, nb_epoch=20, batch_size=1, verbose = 1, shuffle=True, show_accuracy = True)
+        ann.fit(X_train, y_train, nb_epoch=30, batch_size=1, verbose = 1, shuffle=True, show_accuracy = True)
 
         return ann
 
