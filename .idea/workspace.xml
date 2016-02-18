@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="397ebb27-9c23-4b9e-9012-6ea4871988d4" name="Default" comment="GUI: Dodato upustvo">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_model_weights.h5" afterPath="$PROJECT_DIR$/my_model_weights.h5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/ASC/graphs/Thumbs.db" afterPath="$PROJECT_DIR$/samples/ASC/graphs/Thumbs.db" />
+    <list default="true" id="397ebb27-9c23-4b9e-9012-6ea4871988d4" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/my_model_weights - backup.h5" afterPath="$PROJECT_DIR$/my_model_weights - backup_30_epoch.h5" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui.py" afterPath="$PROJECT_DIR$/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neural_network.py" afterPath="$PROJECT_DIR$/neural_network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spectogram.py" afterPath="$PROJECT_DIR$/spectogram.py" />
     </list>
     <ignored path="soft-projekat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="gui.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42051283">
+            <state vertical-scroll-proportion="-5.6551723">
               <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -40,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neural_network.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="neural_network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/neural_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.32458234">
+              <caret line="114" column="48" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="48" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -620,15 +616,22 @@
       <option name="project" value="LOCAL" />
       <updated>1455635479842</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="GUI: Dodate instrukcije u pocetnom prozoru.">
+      <created>1455821371320</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1455821371320</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.49121523" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.49633968" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="GitLabIntegration" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -639,7 +642,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41009465" sideWeight="0.4978038" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.49121523" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -661,7 +663,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="- Dodata je mogucnost iscrtavanja podgrafika u okviru ulaznog signala, za proizvoljan broj podgrafika&#10;- Dodata obaveza izbora datoteke sa .wav formatom, prilikom ucitavanja datoteke" />
     <MESSAGE value="GUI:&#10;1. Dodato dugme za pozivanje iscrtavanja spectrograma.&#10;2. Dodata radio grupa za izbor 2D ili 3D iscrtavanja grafika.&#10;FUN:&#10;1. U Plot.py dodato iscrtavanje spectrograma." />
     <MESSAGE value="FUN:&#10;1. Dodat novi nacin iscrtavanja spectrograma. (neohpodno ispitati jos sve patametre te metode plt.specgram(...))" />
     <MESSAGE value="FUN: 1. Novi plot za spektrogram, ispravljena vremenska skala i logaritamski rast frekvencije." />
@@ -686,7 +687,8 @@
     <MESSAGE value="FUN: Ispravljene putanje cuvanja augmentovanih podataka iz Data-Set-a." />
     <MESSAGE value="DATASET: Obogacen novim semplovima i izgenerisanim augmented podacima.&#10;FUN: Ispravljena augmentacija podataka po Y osi...&#10;STRUCT: Dodat fajl training_log.txt" />
     <MESSAGE value="GUI: Dodan termiran output u vidu tKinter Text widgeta u klasi Display. &#10;FUN: Dodati ispisi pri pocetku i kraju procedura." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI: Dodan termiran output u vidu tKinter Text widgeta u klasi Display. &#10;FUN: Dodati ispisi pri pocetku i kraju procedura." />
+    <MESSAGE value="GUI: Dodate instrukcije u pocetnom prozoru." />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI: Dodate instrukcije u pocetnom prozoru." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.71590906" />
   </component>
   <component name="XDebuggerManager">
@@ -1059,20 +1061,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42051283">
+        <state vertical-scroll-proportion="-5.6551723">
           <caret line="155" column="24" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neural_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1136,6 +1128,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neural_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32458234">
+          <caret line="114" column="48" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
