@@ -1,5 +1,8 @@
 # Sound Recognition
-## Using Neural Networks
+## Using Neural Networks - Convolution2D
+
+### Technical specs
+Python + OpenCV 3.0 + Keras lib for Neural Networks
 
 ### Summary
 
