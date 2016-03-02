@@ -113,7 +113,7 @@ def plotstft(audiopath, generatefig=True, binsize=2**10, plotpath=None, colormap
         img_data = prepare_fig_to_img(fig)      #za formiranje grafika u data-set-u ... TODO: napraviti zasebnu fun..
         cv2.imwrite(plotpath, img_data)
 
-        plt.close(fig) # sprecava memory leak - curenje memorije
+        #plt.close(fig) # sprecava memory leak - curenje memorije
     return fig      # vrati matlabov plot obj(numpy array)
 
 def create_data_set_graphs():
@@ -191,22 +191,22 @@ def load_data_set_graphs():
 
     for asc_file in os.listdir("samples/ASC/graphs/"):
         if asc_file.endswith(".png"):
-            img_data = cv2.imread("samples/ASC/graphs/" + asc_file)
+            img_data = cv2.imread("samples/ASC/graphs/" + asc_file, 0)
             asc_graphs_array.append(img_data)
 
     for desc_file in os.listdir("samples/DESC/graphs/"):
         if desc_file.endswith(".png"):
-            img_data = cv2.imread("samples/DESC/graphs/" + desc_file)
+            img_data = cv2.imread("samples/DESC/graphs/" + desc_file, 0)
             desc_graphs_array.append(img_data)
 
     for flat_file in os.listdir("samples/FLAT/graphs/"):
         if flat_file.endswith(".png"):
-            img_data = cv2.imread("samples/FLAT/graphs/" + flat_file)
+            img_data = cv2.imread("samples/FLAT/graphs/" + flat_file, 0)
             flat_graphs_array.append(img_data)
 
     for soy_file in os.listdir("samples/SOY/graphs/"):
         if soy_file.endswith(".png"):
-            img_data = cv2.imread("samples/SOY/graphs/" + soy_file)
+            img_data = cv2.imread("samples/SOY/graphs/" + soy_file, 0)
             soy_graphs_array.append(img_data)
 
 

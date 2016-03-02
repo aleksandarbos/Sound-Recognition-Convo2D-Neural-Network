@@ -156,9 +156,9 @@ class Gui:
         self.disp.pack()
 
         print "==================INSTRUCTIONS==================="
-        print "1. Load Neural Network weights model..."
+        print "1. Load Convolution2D Neural Network weights model..."
         print "2. Hit *Record* button and wait 1 sec after Beep signal, then start whistling..."
-        print "3. Hit *Predict* button and check the results..."
+        print "3. Hit *Recognize* button and check the results..."
         print "================================================\n"
 
     def create_result(self, root):
@@ -173,7 +173,7 @@ class Gui:
         t_result = Label(frame_result, height=1, width=20, textvariable=self.t_result_str_var, bg="white")
         t_result.pack(pady=10, padx=5, side=LEFT)
 
-        b_predict = Button(frame_result, text='Predict', command= lambda: NeuralNetwork.predict_results())
+        b_predict = Button(frame_result, text='Recognize', command= lambda: NeuralNetwork.predict_results())
         b_predict.pack(pady=10, padx=5, side=LEFT)
 
         b_details = Button(frame_result, text='Details')
