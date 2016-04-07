@@ -46,4 +46,4 @@ Using sound samples for reaching your goal:
 
 ### References
 [Great spectrogram article](http://www.frank-zalkow.de/en/code-snippets/create-audio-spectrograms-with-python.html) <br/ >
-[Faculty Of Techical Scieces, Novi Sadm AI-lab](https://github.com/ftn-ai-lab/sc-2015)
+[University Of Novi Sad, Faculty Of Techical Scieces, AI-lab](https://github.com/ftn-ai-lab/sc-2015)
