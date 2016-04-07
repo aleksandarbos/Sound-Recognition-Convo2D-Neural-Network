@@ -5,7 +5,6 @@
 Python + OpenCV 3.0 + Keras lib for Neural Networks
 
 ### Summary
-
 The main goal this project is to recognize *(fingerprint)* short audio samples, such as short speech command, whistle, 
 or any other sound from nature and map them to specific action.
 
@@ -17,13 +16,25 @@ Using sound samples for reaching your goal:
     - Using human voice for commanding smarthpone, smart vehicle during the ride
     - Can be of great use to people with major disorder
 
-### API Reference
+### Implemented:
+
+    - So far, software is trained to recognize whistle melodies and short audio samples. 
+    It can be easly upgraded to recognize specific types of sound.
+
+### Further implemenation:
+
+     - Sound recognition in real-time (not from audio samples, live recording from mic)
+     - New data-sets and new training
+
+### Screenshots:
+    - Main frame: ![Alt text](/images/screenshots/mainframe.png?raw=true "AS3.0 Collision Detection")
 
 ### Instalation
 
 ### Licence
+    - MIT
 
 ### References
-
-    -http://www.frank-zalkow.de/en/code-snippets/create-audio-spectrograms-with-python.html
-    -https://github.com/ftn-ai-lab/sc-2015
+    
+    - [Great spectrogram article](http://www.frank-zalkow.de/en/code-snippets/create-audio-spectrograms-with-python.html)
+    - [Faculty Of Techical Scieces, Novi Sadm AI-lab](https://github.com/ftn-ai-lab/sc-2015)
