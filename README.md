@@ -13,7 +13,7 @@ or any other sound from nature and map them to specific action.
 Using sound samples for reaching your goal:
     - Sound recognition of songs *(music)* , sounds from nature, human voice
     - Using human voice for commanding smarthpone, smart vehicle during the ride
-    - Can be of great use to people with major disorder
+    - Can be of great use to people with major disability.
 
 ### Implemented:
     - So far, software is trained to recognize whistle melodies and short audio samples. 
