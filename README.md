@@ -5,7 +5,7 @@
 Python + OpenCV 3.0 + Keras lib for Neural Networks
 
 ### Summary
-The main goal this project is to recognize *(fingerprint)* short audio samples, such as short speech command, whistle, 
+The main goal of this project is to recognize *(fingerprint)* short audio samples, such as short speech command, whistle, 
 or any other sound from nature and map them to specific action.
 
 ### Motivation
