@@ -2,7 +2,7 @@
 ## Using Neural Networks - Convolution2D
 
 ### Technical specs
-Python + OpenCV 3.0 + Keras lib for Neural Networks
+Python(Keras lib for Neural Networks) + OpenCV 3.0
 
 ### Summary
 The main goal of this project is to recognize *(fingerprint)* short audio samples, such as short speech command, whistle, 
